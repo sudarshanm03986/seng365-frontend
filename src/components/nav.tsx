@@ -24,7 +24,7 @@ const Nav = () => {
     const userImage = () => {
 
 
-        return <div className=" transition duration-300  border-2  border-gray-300 p-1  text-link  w-10 h-10 flex items-center justify-center hover:border-accent hover:text-accent">
+        return <div className="">
 
             <BsPersonFill  className="text-[2rem]"/>
         </div>
@@ -51,13 +51,27 @@ const Nav = () => {
                 <input placeholder="Search Petition" className="appearance-none border-none focus:outline-none bg-transparent"></input>
                 <button  className=" transition duration-300  text-link hover:text-accent">Search</button>
                 </div>
-                {localStorage.getItem('token') ? 
-                    <button className=" transition duration-300 p-2 rounded border-2 border-gray-300 text-link hover:shadow-md hover:border-accent hover:text-accent">Login</button> :
+                {!localStorage.getItem('token') ? 
+                    <a href="/login" className="transition duration-300 p-2 rounded border-2 border-gray-300 text-link hover:shadow-md hover:border-accent hover:text-accent">Login</a> :
                     <div className="flex">
-                        <button className="group/login" type="button" onClick={() => setShowUserMenu(!showUserMenu)}>{userImage()}</button>
+                        <button className="transition 
+                                            duration-300 
+                                            rounded
+                                             border-2 
+                                              border-gray-300 p-1 
+                                               text-link  w-full h-full
+                                               flex items-center 
+                                               justify-center 
+                                               hover:border-accent 
+                                               hover:text-accent
+                                               focus:shadow-md
+                                               hover:shadow-md
+                                               focus:border-secondary
+                                               focus:text-secondary" 
+                        type="button" onClick={() => setShowUserMenu(!showUserMenu)}>{userImage()}</button>
 
                         {showUserMenu ? 
-                        <div className="fixed h-fit translate-y-[3.9rem] -translate-x-8  bg-background w-[8rem] shadow-md flex flex-col border-[1px] border-gray-300 sl">
+                        <div className="fixed h-fit translate-y-[3.9rem] -translate-x-10  bg-background w-[8rem] shadow-md flex flex-col border-[1px] border-gray-300 sl">
                             <button className=" transition duration-300 p-2 text-link hover:bg-accent hover:text-white"> Profile</button>
                             <button className=" transition duration-300 p-2 text-link hover:bg-accent hover:text-white">Logout</button>
 
