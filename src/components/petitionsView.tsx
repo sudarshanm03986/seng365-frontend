@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import {useSearchParams} from "react-router-dom";
 
 import PetitionsCard from "./petitionsCard";
+import PetitionsSearch from "./petitionsSearch";
 
 
 const PetitionsView = () => {
@@ -19,9 +20,19 @@ const PetitionsView = () => {
 
     useEffect(() => {
 
+        const getParams = () => {
+
+            let query = '?'
+
+            query += (searchParams.get('q')) ? `&q=${searchParams.get('q')}` : '';
+
+            return query
+
+        }
+
         const getPetitons = () => {
 
-            axios.get(process.env.REACT_APP_DOMAIN + '/petitions') 
+            axios.get(process.env.REACT_APP_DOMAIN + '/petitions' + getParams()) 
             .then((res) => {
                 setErrorFlag(false)
                 setErrorMessage("")
@@ -52,11 +63,10 @@ const PetitionsView = () => {
 
     }
 
-    return ( 
+    return ( errorFlag ? <div> {errorMessage}</div> :
         <div> 
-            
-            
-            {display_all_petitions()}
+            <PetitionsSearch/>
+            {display_all_petitions()} 
         </div>
      );
 }

@@ -6,6 +6,7 @@ import DefaultPetitionImg from './../assets/default_petiitio_img.jpg'
 import DefaultOwnerImg from './../assets/default_owner_img.png'
 
 
+
 const PetitionsCard = (props: any) => {
     const [heroPetitionImage, setHeroPetitionImage] = useState("");
     const [heroOwnerImage, setHeroOwnerImage] = useState("");
@@ -76,10 +77,6 @@ const PetitionsCard = (props: any) => {
                     </div>
                 </div>
                
-                
-
-
-                
 
             </div>
 
