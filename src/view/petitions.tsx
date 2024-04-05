@@ -2,7 +2,7 @@ import PetitionsView from "../components/petitionsView";
 
 const Petitions = () => {
     return (  
-        <div className="pt-20 w-screen h-screen bg-background flex justify-center">
+        <div className="pt-20 w-full h-fit min-h-screen bg-background flex justify-center">
 
             <div className="xl:w-xl  w-full  flex py-2 flex-col ">
 

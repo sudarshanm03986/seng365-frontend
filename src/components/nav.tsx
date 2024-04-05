@@ -41,7 +41,7 @@ const Nav = () => {
 
 
             <div className="flex flex-row gap-6 items-center"> 
-                <h1 className="text-primary font-bold text-[2rem]">Petiton</h1>
+                <h1 className="text-primary font-bold text-[2rem]">Petition</h1>
                 <a className={location.pathname === '/' ? active : notActive} href="/">Home</a>
                 <a className={location.pathname === '/petitions' ? active : notActive} href="/petitions">Petitions</a>
                 <a className={location.pathname === '/supporter' ? active : notActive} href="/supporter">Supporter</a>
