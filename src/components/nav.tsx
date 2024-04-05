@@ -21,6 +21,9 @@ const Nav = () => {
         };
       }, []);
 
+
+
+
     const userImage = () => {
 
 
@@ -47,10 +50,10 @@ const Nav = () => {
             </div>
             
             <div className="flex flex-row gap-2 ">
-                <div className="transition duration-300 p-2 rounded border-2 border-gray-300 hover:shadow-md hover:border-accent focus-within:shadow-md focus-within:border-accent">
-                <input placeholder="Search Petition" className="appearance-none border-none focus:outline-none bg-transparent"></input>
-                <button  className=" transition duration-300  text-link hover:text-accent">Search</button>
-                </div>
+                {location.pathname === '/petitions'? "" : <form action="/petitions"className="transition duration-300 p-2 rounded border-2 border-gray-300 hover:shadow-md hover:border-accent focus-within:shadow-md focus-within:border-accent">
+                    <input name='q' placeholder="Search Petition" className="appearance-none border-none focus:outline-none bg-transparent"></input>
+                    <button type="submit" className=" transition duration-300  text-link hover:text-accent">Search</button>
+                </form>}
                 {!localStorage.getItem('token') ? 
                     <a href="/login" className="transition duration-300 p-2 rounded border-2 border-gray-300 text-link hover:shadow-md hover:border-accent hover:text-accent">Login</a> :
                     <div className="flex">
