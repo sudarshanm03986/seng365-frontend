@@ -28,7 +28,15 @@ const PetitionsView = () => {
 
             query += (searchParams.get('q')) ? `&q=${searchParams.get('q')}` : '';
 
-            return query
+
+            const categories = searchParams.getAll('categoryIds');
+
+            query +=  (categories ? categories.map((id) => `&categoryIds=${id}`) : '' );
+
+
+
+
+            return query;
 
         }
 
@@ -50,7 +58,7 @@ const PetitionsView = () => {
 
     getPetitons();
 
-    })
+    }, [searchParams])
 
     const display_all_petitions = () =>{
 
