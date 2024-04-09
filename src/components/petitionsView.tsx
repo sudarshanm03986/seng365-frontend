@@ -69,9 +69,9 @@ const PetitionsView = () => {
         <div className="flex flex-col gap-2 py-3"> 
             <div className="flex items-center gap-2">
                 
-                <PetitionsSearch/>
-                <PetitionsFilter/>
-                <PetitionsSort/>
+                <PetitionsSearch  setParams={setSearchParams}/>
+                <PetitionsFilter setParams={setSearchParams}/>
+                <PetitionsSort />
             </div>
 
             {display_all_petitions()} 
