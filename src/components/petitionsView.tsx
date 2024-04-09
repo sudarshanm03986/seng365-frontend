@@ -4,6 +4,8 @@ import {useSearchParams} from "react-router-dom";
 
 import PetitionsCard from "./petitionsCard";
 import PetitionsSearch from "./petitionsSearch";
+import PetitionsFilter from "./petitionsFilter";
+import PetitionsSort from "./petitionsSort";
 
 
 const PetitionsView = () => {
@@ -64,8 +66,14 @@ const PetitionsView = () => {
     }
 
     return ( errorFlag ? <div> {errorMessage}</div> :
-        <div> 
-            <PetitionsSearch/>
+        <div className="flex flex-col gap-2 py-3"> 
+            <div className="flex items-center gap-2">
+                
+                <PetitionsSearch/>
+                <PetitionsFilter/>
+                <PetitionsSort/>
+            </div>
+
             {display_all_petitions()} 
         </div>
      );

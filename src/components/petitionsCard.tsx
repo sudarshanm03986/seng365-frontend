@@ -12,14 +12,46 @@ const PetitionsCard = (props: any) => {
     const [heroOwnerImage, setHeroOwnerImage] = useState("");
     const [categoryName, setCategoryName] = useState("")
 
+    // useEffect(() => {
+    //     const getImage = () => {
+
+    //     }
+
+    // }, [props.petitions.petitionsId])
+
     useEffect(() => {
-        const getImage = () => {
+        const getOwnerImage = () => {
+            axios.get(process.env.REACT_APP_DOMAIN + '/users/' + props.petitions.ownerId + '/image', { responseType: 'blob'}) 
+            .then((res) => {
+
+                const imageUrl = URL.createObjectURL(res.data);
+                setHeroOwnerImage(imageUrl);
+
+                
+            }, (err) => {
+
+                setHeroOwnerImage(DefaultOwnerImg);
+                
+            })
 
         }
 
-    }, [props.petitions.petitionsId])
+        const getPetitionImage = () => {
+            axios.get(process.env.REACT_APP_DOMAIN + '/petitions/' + props.petitions.petitionId + '/image', { responseType: 'blob'}) 
+            .then((res) => {
 
-    useEffect(() => {
+                const imageUrl = URL.createObjectURL(res.data);
+                setHeroPetitionImage(imageUrl);
+
+                
+            }, (err) => {
+
+                setHeroPetitionImage(DefaultPetitionImg);
+                
+            })
+        }
+
+
         const getCategory = () => {
             axios.get(process.env.REACT_APP_DOMAIN + '/petitions/categories') 
             .then((res) => {
@@ -33,23 +65,28 @@ const PetitionsCard = (props: any) => {
                 
                 
             }, (err) => {
+
+                console.log(err)
                 
             })
 
         }
 
         getCategory();
+        getPetitionImage();
+        getOwnerImage();
 
-    }, [props.petitions.categoryId])
+    }, [props.petitions.categoryId, props.petitions.petitionId, props.petitions.ownerId])
 
 
-    console.log(props.petitions.supportingCost)
     return ( 
 
         <a  href={"/petition/" + props.petitions.petitionId} className=" transition duration-200 flex flex-col gap-2 shadow-lg  hover:shadow-accent py-5 rounded">
             <div className="flex px-4 gap-5 items-center ">
 
-                <img src={DefaultOwnerImg} className="object-fit w-10 h-10 rounded-full"></img>
+               
+                <img src={heroOwnerImage} className="rounded-full w-10 h-10 object-contain"></img>
+               
 
                 <div className="flex flex-col text-left text-sm" >
                     <p className="font-semibold">{props.petitions.ownerFirstName} {props.petitions.ownerLastName}</p>
@@ -59,12 +96,12 @@ const PetitionsCard = (props: any) => {
 
             <div  className="border-y-2">
 
-                <img src={DefaultPetitionImg} className="object-contain w-full h-48"></img>
+                <img src={heroPetitionImage} className="object-contain w-full h-48"></img>
 
             </div>
 
             <div className="flex flex-col gap-3">
-                <p className="font-semibold text-primary text-xl">{props.petitions.title}</p>
+                <p className="font-semibold text-primary text-lg">{props.petitions.title}</p>
 
                 <div className=" flex justify-evenly">
                     <div>
@@ -73,7 +110,7 @@ const PetitionsCard = (props: any) => {
                     </div>
                     <div>
                         <p  className="font-semibold text-secondary">Minmum Cost</p>
-                        <p>${props.petitions.supportingCost}.00</p>
+                        <p>{props.petitions.supportingCost === 0 ? 'FREE' :  '$' + props.petitions.supportingCost + '.00'}</p>
                     </div>
                 </div>
                

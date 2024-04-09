@@ -33,7 +33,7 @@ const Nav = () => {
         </div>
     }
     return ( 
-        <nav className="w-screen h-20 bg-background shadow-md fixed top-0 left-0 flex items-center justify-center">
+        <nav className="w-screen h-20 bg-background shadow-md fixed top-0 left-0 flex items-center justify-center z-10">
 
             <div className="w-screen px-10 xl:p-0 flex flex-row xl:w-xl justify-between h-fit items-center">
             
@@ -75,7 +75,7 @@ const Nav = () => {
 
                         {showUserMenu ? 
                         <div className="fixed h-fit translate-y-[3.9rem] -translate-x-10  bg-background w-[8rem] shadow-md flex flex-col border-[1px] border-gray-300 sl">
-                            <button className=" transition duration-300 p-2 text-link hover:bg-accent hover:text-white"> Profile</button>
+                            <button className=" transition duration-300 p-2 text-link hover:bg-accent hover:text-white">Profile</button>
                             <button className=" transition duration-300 p-2 text-link hover:bg-accent hover:text-white">Logout</button>
 
 
