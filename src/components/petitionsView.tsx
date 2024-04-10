@@ -35,8 +35,7 @@ const PetitionsView = () => {
 
             query += (searchParams.get('supportingCost') ? `&supportingCost=${searchParams.get('supportingCost')}` : '');
 
-
-
+            query += (searchParams.get('sortBy') ? `&sortBy=${searchParams.get('sortBy') }` : '');
 
             return query;
 
@@ -81,7 +80,7 @@ const PetitionsView = () => {
                 
                 <PetitionsSearch  setParams={setSearchParams}/>
                 <PetitionsFilter setParams={setSearchParams}/>
-                <PetitionsSort />
+                <PetitionsSort setParams={setSearchParams}/>
             </div>
 
             {display_all_petitions()} 
