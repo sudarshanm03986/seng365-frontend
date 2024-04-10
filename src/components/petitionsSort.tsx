@@ -19,7 +19,7 @@ const PetitionsSort = (props:any) => {
         else if (e.target.value === 'Lowest Cost') {
             searchParams.append('sortBy', 'COST_ASC');
         }
-        else if (e.target.value === 'Lowest Cost') {
+        else if (e.target.value === 'Highest Cost') {
             searchParams.append('sortBy', 'COST_DESC');
         }
 
@@ -30,7 +30,7 @@ const PetitionsSort = (props:any) => {
         else if (e.target.value === 'Alphabetical Z-A') {
             searchParams.append('sortBy', 'ALPHABETICAL_DESC');
         } else {
-            searchParams.append('sortBy', 'CREATED_DESC');
+            searchParams.append('sortBy', 'CREATED_ASC');
 
         }
 

@@ -6,17 +6,20 @@ import PetitionsCard from "./petitionsCard";
 import PetitionsSearch from "./petitionsSearch";
 import PetitionsFilter from "./petitionsFilter";
 import PetitionsSort from "./petitionsSort";
+import PetitionsPagination from "./petitionsPagination";
 
 
 const PetitionsView = () => {
 
     const [searchParams, setSearchParams] = useSearchParams();
-    const [petitions, setPetitions] = useState<Array<Petitions>>([])
+    const [petitions, setPetitions] = useState<Array<Petitions>>([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [numOfPetitions, setNumOfPetitions] = useState(0);
 
 
     //========ERROR=======
-    const [errorFlag, setErrorFlag] = useState(false)
-    const [errorMessage, setErrorMessage] = useState("")
+    const [errorFlag, setErrorFlag] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
     
 
 
@@ -45,13 +48,14 @@ const PetitionsView = () => {
 
             axios.get(process.env.REACT_APP_DOMAIN + '/petitions' + getParams()) 
             .then((res) => {
-                setErrorFlag(false)
-                setErrorMessage("")
-                setPetitions(res.data.petitions)
+                setErrorFlag(false);
+                setErrorMessage("");
+                setPetitions(res.data.petitions);
+                setNumOfPetitions(res.data.count);
                
             }, (err) => {
-                setErrorFlag(true)
-                setErrorMessage(err.toString())
+                setErrorFlag(true);
+                setErrorMessage(err.toString());
             })
 
 
@@ -88,6 +92,8 @@ const PetitionsView = () => {
             </div>
 
             {display_all_petitions()} 
+
+            <PetitionsPagination count={numOfPetitions}  setParams={setSearchParams}/>
         </div>
      );
 }
