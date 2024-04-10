@@ -12,13 +12,6 @@ const PetitionsCard = (props: any) => {
     const [heroOwnerImage, setHeroOwnerImage] = useState("");
     const [categoryName, setCategoryName] = useState("")
 
-    // useEffect(() => {
-    //     const getImage = () => {
-
-    //     }
-
-    // }, [props.petitions.petitionsId])
-
     useEffect(() => {
         const getOwnerImage = () => {
             axios.get(process.env.REACT_APP_DOMAIN + '/users/' + props.petitions.ownerId + '/image', { responseType: 'blob'}) 
@@ -81,11 +74,11 @@ const PetitionsCard = (props: any) => {
 
     return ( 
 
-        <a  href={"/petition/" + props.petitions.petitionId} className=" transition duration-200 flex flex-col gap-2 shadow-lg  hover:shadow-accent py-5 rounded">
+        <a  href={"/petitions/" + props.petitions.petitionId} className=" transition duration-200 flex flex-col gap-2 shadow-lg  hover:shadow-accent py-5 rounded">
             <div className="flex px-4 gap-5 items-center ">
 
                
-                <img src={heroOwnerImage} className="rounded-full w-10 h-10 object-contain"></img>
+                <img src={heroOwnerImage} alt={props.petitions.petiitonId} className="rounded-full w-10 h-10 object-contain"></img>
                
 
                 <div className="flex flex-col text-left text-sm" >
@@ -96,7 +89,7 @@ const PetitionsCard = (props: any) => {
 
             <div  className="border-y-2">
 
-                <img src={heroPetitionImage} className="object-contain w-full h-48"></img>
+                <img src={heroPetitionImage} alt={props.petitions.ownerId} className="object-contain w-full h-48"></img>
 
             </div>
 

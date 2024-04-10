@@ -129,10 +129,10 @@ const PetitionsFilter = (props:any) => {
 
     return ( 
         <div>
-            <button onClick={()=> setFilterShow(!filterShow)} className=" transition duration-300 py-2  px-6 rounded bg-link text-white hover:shadow-lg focus:shadow-lg hover:bg-accent focus:bg-accent"><div className="flex items-center gap-1 justify-between"><FaFilter/> <p className="font-semibold">Filter</p></div></button>
+            <button onClick={()=> setFilterShow(!filterShow)} className=" transition duration-300 py-2 border-2 border-gray-300 px-6 rounded bg-gray-300 hover:text-white focus:text-white hover:shadow-lg focus:shadow-lg hover:bg-accent hover:border-accent focus:border-accent focus:bg-accent"><div className="flex items-center gap-1 justify-between"><FaFilter/> <p className="font-semibold">Filter</p></div></button>
 
             {filterShow ? 
-            <div className="absolute h-fit bg-background w-[400px] translate-y-1 shadow-md flex flex-col border-[1px] border-gray-300 gap-2 p-2 rounded">
+            <div className="absolute h-fit bg-background w-[400px] translate-y-1 shadow-md flex flex-col border-[1px] border-gray-300 gap-2 px-2 rounded">
                   <div className=" flex flex-row p-3  justify-between items-center">
                     <p className="text-primary text-xl font-semibold">Filters</p>
 

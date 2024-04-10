@@ -1,4 +1,4 @@
-import PetitionsView from "../components/petitionsView";
+import PetitionsView from "../components/petitionsViews";
 
 const Petitions = () => {
     return (  

@@ -1,91 +1,130 @@
 import axios from "axios";
-import { useState, useEffect } from "react";
-import {useSearchParams} from "react-router-dom";
+import { useEffect , useState} from "react";
+import { useParams } from "react-router-dom";
 
-import PetitionsCard from "./petitionsCard";
-import PetitionsSearch from "./petitionsSearch";
-import PetitionsFilter from "./petitionsFilter";
-import PetitionsSort from "./petitionsSort";
+import DefaultPetitionImg from './../assets/default_petiitio_img.jpg'
+import DefaultOwnerImg from './../assets/default_owner_img.png'
 
+const  PetitionView = () => {
 
-const PetitionsView = () => {
+    const {id} = useParams();
 
-    const [searchParams, setSearchParams] = useSearchParams();
-    const [petitions, setPetitions] = useState<Array<Petitions>>([])
+    const [heroPetitionImage, setHeroPetitionImage] = useState("");
+    const [heroOwnerImage, setHeroOwnerImage] = useState("");
+    const [categoryName, setCategoryName] = useState("")
 
+    const [petition, setPetition] = useState<Petition>({"petitionId" : 0, 
+                                                        "title" : "", 
+                                                        "categoryId" : 0, 
+                                                        "ownerId" : 0, 
+                                                        "ownerFirstName" : "", 
+                                                        "ownerLastName" : "", 
+                                                        "numberOfSupporters" : 0,
+                                                        "creationDate" : "",
+                                                        "description" : "",
+                                                        "moneyRaised" : 0,
+                                                        "supportTiers": []});
 
-    //========ERROR=======
-    const [errorFlag, setErrorFlag] = useState(false)
-    const [errorMessage, setErrorMessage] = useState("")
-    
 
 
     useEffect(() => {
 
-        const getParams = () => {
+        const getPetition = () => {
+            axios.get(process.env.REACT_APP_DOMAIN + '/petitions/' + id)
+            .then ((res) => {   
 
-            let query = '?'
+                setPetition(res.data);
 
-            query += (searchParams.get('q')) ? `&q=${searchParams.get('q')}` : '';
+            
+
+            }, (err) => {
+                console.log(err)
 
 
-            const categories = searchParams.getAll('categoryIds');
+            })
+        }
 
-            query +=  (categories ? categories.map((id) => `&categoryIds=${id}`).join('') : '' );
+        getPetition();
 
-            query += (searchParams.get('supportingCost') ? `&supportingCost=${searchParams.get('supportingCost')}` : '');
+    },[id])
 
-            query += (searchParams.get('sortBy') ? `&sortBy=${searchParams.get('sortBy') }` : '');
 
-            return query;
+    useEffect(() => {
+        const getOwnerImage = () => {
+            axios.get(process.env.REACT_APP_DOMAIN + '/users/' + petition.ownerId + '/image', { responseType: 'blob'}) 
+            .then((res) => {
+
+                const imageUrl = URL.createObjectURL(res.data);
+                setHeroOwnerImage(imageUrl);
+
+                
+            }, (err) => {
+
+                setHeroOwnerImage(DefaultOwnerImg);
+                
+            })
 
         }
 
-        const getPetitons = () => {
-
-            axios.get(process.env.REACT_APP_DOMAIN + '/petitions' + getParams()) 
+        const getPetitionImage = () => {
+            axios.get(process.env.REACT_APP_DOMAIN + '/petitions/' + petition.petitionId + '/image', { responseType: 'blob'}) 
             .then((res) => {
-                setErrorFlag(false)
-                setErrorMessage("")
-                setPetitions(res.data.petitions)
-               
+
+                const imageUrl = URL.createObjectURL(res.data);
+                setHeroPetitionImage(imageUrl);
+
+                
             }, (err) => {
-                setErrorFlag(true)
-                setErrorMessage(err.toString())
+
+                setHeroPetitionImage(DefaultPetitionImg);
+                
+            })
+        }
+
+
+        const getCategory = () => {
+            axios.get(process.env.REACT_APP_DOMAIN + '/petitions/categories') 
+            .then((res) => {
+
+                for(const category of res.data) {
+
+                    if (category.categoryId === petition.categoryId ) {
+                        setCategoryName(category.name);
+                    }
+                }
+                
+                
+            }, (err) => {
+
+                console.log(err)
+                
             })
 
+        }
 
-        };
+        getCategory();
+        getPetitionImage();
+        getOwnerImage();
 
-    getPetitons();
+    }, [petition.categoryId, petition.petitionId, petition.ownerId])
 
-    }, [searchParams])
+    return ( 
+    <div className="flex flex-col">
 
-    const display_all_petitions = () =>{
+        <h1 className="text-[3rem] font-semibold text-primary">{petition.title}</h1>
 
-        return <div className=" grid grid-cols-3 gap-3"> 
-        
-        
-        {petitions.map((petition) => 
-        
-            <PetitionsCard  petitions={petition}/>)}
+        <div className="flex flex-row pt-10"> 
+            <img src={heroPetitionImage} className="w-[30%] rounded-xl" /> 
 
-        </div>
+            <div>
 
-    }
 
-    return ( errorFlag ? <div> {errorMessage}</div> :
-        <div className="flex flex-col gap-2 py-3"> 
-            <div className="flex items-center gap-2">
-                
-                <PetitionsSearch  setParams={setSearchParams}/>
-                <PetitionsFilter setParams={setSearchParams}/>
-                <PetitionsSort setParams={setSearchParams}/>
             </div>
-
-            {display_all_petitions()} 
+            
         </div>
-     );
+
+        
+    </div> );
 }
  
-export default PetitionsView;
+export default PetitionView;

@@ -9,6 +9,7 @@ import Login from "./view/login";
 import Register from "./view/register";
 import NotFound from "./view/notFound";
 import Petitions from "./view/petitions";
+import Petition from "./view/petition";
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
             <Route path="/login" element={<Login/>}/>
             <Route path="/register" element={<Register/>}/>
             <Route path="/petitions" element={<Petitions/>}/>
+            <Route path="/petitions/:id" element={<Petition/>}/>
 
 
             <Route path="*" element={<NotFound/>}/>
