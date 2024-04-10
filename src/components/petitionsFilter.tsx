@@ -6,15 +6,14 @@ import Select from 'react-select';
 
 import { FaFilter } from "react-icons/fa";
 import { IoIosClose } from "react-icons/io";
-import { BsBorderWidth } from "react-icons/bs";
 
 const PetitionsFilter = (props:any) => {
 
     const [searchParams] =  useSearchParams();
     const [filterShow, setFilterShow] = useState(false);
     const [category, setCategory] = useState <Array<Category>>([]);
-    const [selectedCategory, setSelectedCategory] = useState <number[]>([]);
-    const [supportCost, setSupportCost] = useState('');
+    // const [selectedCategory, setSelectedCategory] = useState <number[]>([]);
+    // const [supportCost, setSupportCost] = useState('');
 
 
 
@@ -47,48 +46,48 @@ const PetitionsFilter = (props:any) => {
           }
       })
   };
-    // useEffect(() => {
-    //     document.addEventListener('mousedown', () => setFilterShow(false));
-    //     document.addEventListener('scroll', () => setFilterShow(false));
-    
-    //     return () => {
-    //       document.removeEventListener('mousedown',  () => setFilterShow(false));
-    //       document.removeEventListener('scroll', () => setFilterShow(false));
-    //     };
-    //   }, []);
 
 
     const handleSelectChange = (selected : any) => {
 
       const item : {'value': number, 'label': string} [] = selected;
-    
-      setSelectedCategory(item.map((data) => data.value));
+
+      searchParams.delete("categoryIds");
+        
+      for (const id of item) {
+        if (!searchParams.getAll("categoryIds").includes(id.value.toString())) {
+
+          searchParams.append("categoryIds", id.value.toString())
+
+
+
+        }
+      }
+      
+      props.setParams(searchParams);
      
     };
 
-    useEffect(() => {
+    const handleSupportCostChange = (e:any) => {
+      searchParams.delete("supportingCost");
 
-      const setCategory = () => {
-
-        console.log(selectedCategory)
-
-        searchParams.delete("categoryIds");
-        
-        for (const id of selectedCategory) {
-          if (!searchParams.getAll("categoryIds").includes(id.toString())) {
-
-            searchParams.append("categoryIds", id.toString())
-
-
-
-          }
-        }
-        props.setParams(searchParams);
+      if (e.target.value) {
+        searchParams.append("supportingCost", e.target.value);
       }
 
-      setCategory()
+      props.setParams(searchParams);
+    }
 
-    }, [selectedCategory, filterShow, supportCost ])
+
+    const handleClearFilter = () => {
+
+
+      searchParams.delete('categoryIds'); 
+      searchParams.delete('supportingCost'); 
+      props.setParams(searchParams)
+
+
+    }
 
     useEffect(() => {
 
@@ -143,7 +142,7 @@ const PetitionsFilter = (props:any) => {
                   <div className=" flex flex-col gap-2 item-center justify-center place-items-center">
                     <p className="text-secondary font-semibold">Supporting Cost</p>
                     <div className=" p-1 rounded bg-white border-2 border-gray-300 hover:shadow-md hover:border-accent focus-within:shadow-md focus-within:border-accent w-full">
-                      <input type="number" value={supportCost}placeholder="$0.00" onChange={(e) => setSupportCost(e.target.value)} className="appearance-none border-none focus:outline-none  p-1 border-link w-full text-center"/>
+                      <input type="number" value={searchParams.get('supportingCost')?.toString()} placeholder="$0.00" onChange={handleSupportCostChange} className="appearance-none border-none focus:outline-none  p-1 border-link w-full text-center"/>
                     </div>
                   </div>
 
@@ -166,7 +165,7 @@ const PetitionsFilter = (props:any) => {
 
                   <div className="flex flex-row justify-center py-3"> 
 
-                    <button onClick={()=> {setSelectedCategory([]); setSupportCost('') }}  className="transition duration-300 py-2 px-6 w-full rounded bg-link text-white hover:shadow-lg focus:shadow-lg hover:bg-accent focus:bg-accent">Clear filters</button>
+                    <button onClick={handleClearFilter}  className="transition duration-300 py-2 px-6 w-full rounded bg-link text-white hover:shadow-lg focus:shadow-lg hover:bg-accent focus:bg-accent">Clear filters</button>
                     
                   </div>
             </div> 

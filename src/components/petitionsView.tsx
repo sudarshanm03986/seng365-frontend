@@ -31,7 +31,9 @@ const PetitionsView = () => {
 
             const categories = searchParams.getAll('categoryIds');
 
-            query +=  (categories ? categories.map((id) => `&categoryIds=${id}`) : '' );
+            query +=  (categories ? categories.map((id) => `&categoryIds=${id}`).join('') : '' );
+
+            query += (searchParams.get('supportingCost') ? `&supportingCost=${searchParams.get('supportingCost')}` : '');
 
 
 
