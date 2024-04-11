@@ -43,7 +43,7 @@ const PetitionsPagination = (props:any) => {
 
             const count = parseInt(searchParams.get('count') || '10', 10);
 
-            setNumPages(parseInt(props.count, 10)/count);
+            setNumPages(Math.ceil(parseInt(props.count, 10)/count));
 
         }
 
@@ -61,9 +61,8 @@ const PetitionsPagination = (props:any) => {
 
             button.push(
                 <button
-                    className="px-4 bg-gray-300 border-r-2"
+                    className={currentPage === i ? "px-4 bg-secondary text-white border-r-2" : "duration-300 px-4 bg-gray-300 border-r-2 hover:bg-accent hover:text-white"}
                     onClick={()=> setCurrentPage(i)}
-                
                 
                 >{i}</button>
             )
@@ -87,7 +86,7 @@ const PetitionsPagination = (props:any) => {
 
             <div className="flex flex-row rounded border-2 border-gray-300">
             <p className="bg-gray-300  p-2 " >Sort by</p>
-            <select onChange={handleChange} className="  p-2">
+            <select onChange={handleChange} className=" rounded p-2">
                 <option>5</option>
                 <option>6</option>
                 <option>7</option>
@@ -99,13 +98,12 @@ const PetitionsPagination = (props:any) => {
             
             </div>
 
-            <div className="flex border-gray-300 border-2 rounded-lg">
-                <button className=" rotate-180 px-3 bg-gray-300 border-l-2 " ><GrChapterNext/></button>
-                <button className=" rotate-180 px-3 bg-gray-300 border-l-2 " ><GrCaretNext/></button>
-               
+            <div className="flex rounded-lg">
+                <button className="rounded-r rotate-180 px-3 bg-gray-300 border-l-2 duration-300 hover:bg-accent hover:text-white" ><GrChapterNext/></button>
+                <button className=" rotate-180 px-3 bg-gray-300 border-l-2 duration-300 hover:bg-accent hover:text-white" ><GrCaretNext/></button>
                 {display_pages_switcher()}
-                <button><GrCaretNext/></button>
-                <button><GrChapterNext/></button>
+                <button className={ currentPage === numPages ? "px-3 bg-link border-r-2": "px-3 bg-gray-300 border-r-2 duration-300 hover:bg-accent hover:text-white"}><GrCaretNext/></button>
+                <button className="px-3 bg-gray-300 rounded-r duration-300 hover:bg-accent hover:text-white"><GrChapterNext/></button>
                 
             </div>
 
