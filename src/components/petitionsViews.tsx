@@ -40,6 +40,12 @@ const PetitionsView = () => {
 
             query += (searchParams.get('sortBy') ? `&sortBy=${searchParams.get('sortBy') }` : '');
 
+            query += (searchParams.get('count') ? `&count=${searchParams.get('count')}` : "");
+
+            query += (searchParams.get('startIndex') ? `&startIndex=${searchParams.get('startIndex')}` : "startIndex=0");
+
+
+
             return query;
 
         }

@@ -8,7 +8,7 @@ import { GrChapterNext } from "react-icons/gr";
 const PetitionsPagination = (props:any) => {
 
     const [numPages, setNumPages] = useState(0);
-    const [currentPage, setCurrentPage] = useState(0);
+    // const [currentPage, setCurrentPage] = useState(1);
     const [searchParams] = useSearchParams();
 
 
@@ -34,6 +34,15 @@ const PetitionsPagination = (props:any) => {
 
         }
 
+        if (!searchParams.get('startIndex')) {
+
+            searchParams.append('startIndex', '0');
+
+            props.setParams(searchParams);
+            
+
+        }
+
     }, [props, searchParams])
 
 
@@ -50,21 +59,40 @@ const PetitionsPagination = (props:any) => {
     
         calculateNumOfPages()
 
-    }, [props]);
+    }, [props, searchParams]);
+
+    // useEffect(() => {
+
+    //     const handlePageChange = () => {
+
+    //         searchParams.delete('startIndex');
+
+    //         searchParams.append('startIndex', ((currentPage-1) * props.count).toString() )
+
+
+    //         props.setParams(searchParams);
+
+
+
+    //     }
+
+
+    //     handlePageChange();
+    // }, [currentPage, searchParams])
 
 
     const display_pages_switcher = () => {
 
         const button = [];
 
-        for (let i = 1; i <= numPages ; i++) {
+        for (let i = 0; i < numPages ; i++) {
 
             button.push(
                 <button
-                    className={currentPage === i ? "px-4 bg-secondary text-white border-r-2" : "duration-300 px-4 bg-gray-300 border-r-2 hover:bg-accent hover:text-white"}
-                    onClick={()=> setCurrentPage(i)}
+                    className={  parseInt(searchParams.get('startIndex') || '0', 10)/ parseInt( searchParams.get('count') || '0', 10) === i ? "px-4 bg-secondary text-white border-r-2" : "duration-300 px-4 bg-gray-300 border-r-2 hover:bg-accent hover:text-white"}
+                    onClick={()=> {searchParams.delete('startIndex') ; searchParams.append('startIndex', (i * parseInt( searchParams.get('count') || '0', 10)).toString()) ;props.setParams(searchParams)}}
                 
-                >{i}</button>
+                >{i +1 }</button>
             )
 
 
@@ -99,11 +127,11 @@ const PetitionsPagination = (props:any) => {
             </div>
 
             <div className="flex rounded-lg">
-                <button className="rounded-r rotate-180 px-3 bg-gray-300 border-l-2 duration-300 hover:bg-accent hover:text-white" ><GrChapterNext/></button>
-                <button className=" rotate-180 px-3 bg-gray-300 border-l-2 duration-300 hover:bg-accent hover:text-white" ><GrCaretNext/></button>
+                <button onClick={()=> {searchParams.delete('startIndex'); searchParams.append('startIndex', '0'); props.setParams(searchParams)}} disabled={ (parseInt(searchParams.get('startIndex') || '0', 10)/ parseInt( searchParams.get('count') || '0', 10)) === 0 } className={" disabled:bg-link disabled:text-black rounded-r rotate-180 px-3 bg-gray-300 border-l-2 duration-300 hover:bg-accent hover:text-white"} ><GrChapterNext/></button>
+                <button className={  parseInt(searchParams.get('startIndex') || '0', 10)/ parseInt( searchParams.get('count') || '0', 10)=== 0 ? " rotate-180 px-3 bg-link border-l-2 ": " rotate-180 px-3 bg-gray-300 border-l-2 duration-300 hover:bg-accent hover:text-white"}><GrCaretNext/></button>
                 {display_pages_switcher()}
-                <button className={ currentPage === numPages ? "px-3 bg-link border-r-2": "px-3 bg-gray-300 border-r-2 duration-300 hover:bg-accent hover:text-white"}><GrCaretNext/></button>
-                <button className="px-3 bg-gray-300 rounded-r duration-300 hover:bg-accent hover:text-white"><GrChapterNext/></button>
+                <button className={  parseInt(searchParams.get('startIndex') || '0', 10)/ parseInt( searchParams.get('count') || '0', 10)  === numPages-1 ? "px-3 bg-link border-r-2": "px-3 bg-gray-300 border-r-2 duration-300 hover:bg-accent hover:text-white"}><GrCaretNext/></button>
+                <button className={ parseInt(searchParams.get('startIndex') || '0', 10)/ parseInt( searchParams.get('count') || '0', 10)  === numPages-1 ? "px-3 bg-link rounded-r  ": "px-3 bg-gray-300 rounded-r duration-300 hover:bg-accent hover:text-white"}><GrChapterNext/></button>
                 
             </div>
 
