@@ -11,6 +11,13 @@ const PetitionsPagination = (props:any) => {
     // const [currentPage, setCurrentPage] = useState(1);
     const [searchParams] = useSearchParams();
 
+    const scrollToTop = () => {
+
+        setTimeout(() => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }, 100);
+    }
+
 
     const handleChange = (e: any) => {
 
@@ -77,7 +84,7 @@ const PetitionsPagination = (props:any) => {
                 <button
                     disabled={ parseInt(searchParams.get('startIndex') || '0', 10)/ parseInt( searchParams.get('count') || '0', 10) === i}
                     className={ "disabled:bg-secondary disabled:text-white duration-300 px-4 bg-gray-300 border-r-2 hover:bg-accent hover:text-white"}
-                    onClick={()=> {searchParams.delete('startIndex') ; searchParams.append('startIndex', (i * parseInt( searchParams.get('count') || '0', 10)).toString()) ;props.setParams(searchParams)}}
+                    onClick={()=> {searchParams.delete('startIndex') ; searchParams.append('startIndex', (i * parseInt( searchParams.get('count') || '0', 10)).toString()) ;props.setParams(searchParams);  scrollToTop();} }
                 
                 >{i +1 }</button>
             )
@@ -113,6 +120,8 @@ const PetitionsPagination = (props:any) => {
 
         }
 
+        scrollToTop();
+
         
 
 
@@ -137,17 +146,46 @@ const PetitionsPagination = (props:any) => {
 
         }
 
+        scrollToTop();
         
 
 
     }
 
+    const handleSkipToStart = () => {
+        
+
+        searchParams.delete('startIndex');
+        searchParams.append('startIndex', '0');
+        props.setParams(searchParams);
+
+
+        scrollToTop();
+
+        
+
+
+    }
+
+    const handleSkipToEnd = () => {
+        
+
+        searchParams.delete('startIndex'); 
+        searchParams.append('startIndex', (parseInt(searchParams.get('count') || '10', 10)* (numPages -1)).toString()); 
+        props.setParams(searchParams);
+
+
+        scrollToTop();
+        
+
+
+    }
 
     return ( 
 
         <div className="flex flex-col  gap-10 p-5">
 
-            {parseInt(searchParams.get('startIndex') || '0', 10)/ parseInt( searchParams.get('count') || '0', 10)  === numPages-1 ? <p className="text-lg font-semibold text-primary" >End of Petition Results !</p> : ""}
+            {parseInt(searchParams.get('startIndex') || '0', 10)/ parseInt( searchParams.get('count') || '0', 10)  >= numPages-1 ? <p className="text-lg font-semibold text-primary" >End of Petition Results !</p> : ""}
         <div className=" grid grid-cols-3">
 
             <div className="flex flex-row rounded border-2 border-gray-300 w-fit">
@@ -166,7 +204,7 @@ const PetitionsPagination = (props:any) => {
 
             <div className="flex justify-center">
             <div className="flex rounded-lg">
-                <button onClick={()=> {searchParams.delete('startIndex'); searchParams.append('startIndex', '0'); props.setParams(searchParams)}} 
+                <button onClick={handleSkipToStart} 
                         disabled={ (parseInt(searchParams.get('startIndex') || '0', 10)/ parseInt( searchParams.get('count') || '0', 10)) === 0 } 
                         className={" disabled:bg-link disabled:text-black rounded-r rotate-180 px-3 bg-gray-300 border-l-2 duration-300 hover:bg-accent hover:text-white"} >
                             <GrChapterNext/></button>
@@ -184,7 +222,7 @@ const PetitionsPagination = (props:any) => {
                         disabled={parseInt(searchParams.get('startIndex') || '0', 10)/ parseInt( searchParams.get('count') || '0', 10)  === numPages-1 }
                         className={ " disabled:bg-link disabled:text-black px-3 bg-gray-300 border-r-2 duration-300 hover:bg-accent hover:text-white"}><GrCaretNext/></button>
                 <button 
-                        onClick={()=> {searchParams.delete('startIndex'); searchParams.append('startIndex', (parseInt(searchParams.get('count') || '10', 10)* (numPages -1)).toString()); props.setParams(searchParams)}} 
+                        onClick={handleSkipToEnd} 
                         disabled={parseInt(searchParams.get('startIndex') || '0', 10)/ parseInt( searchParams.get('count') || '0', 10)  === numPages-1 }
                         className={ "disabled:bg-link disabled:text-black px-3 bg-gray-300 rounded-r duration-300 hover:bg-accent hover:text-white"}><GrChapterNext/></button>
                 
