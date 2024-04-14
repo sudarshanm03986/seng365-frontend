@@ -74,7 +74,7 @@ const PetitionsCard = (props: any) => {
 
     return ( 
 
-        <a  href={"/petitions/" + props.petitions.petitionId} className=" transition duration-200 flex flex-col gap-2 shadow-lg  hover:shadow-accent py-5 rounded">
+        <a  href={"/petitions/" + props.petitions.petitionId} className=" transition duration-200 flex flex-col gap-2 shadow-lg bg-white  hover:shadow-accent py-5 rounded">
             <div className="flex px-4 gap-5 items-center ">
 
                

@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 
 import DefaultPetitionImg from './../assets/default_petiitio_img.jpg'
 import DefaultOwnerImg from './../assets/default_owner_img.png'
+import PetitionsSupporter from "./petitionsSupporter";
 
 const  PetitionView = () => {
 
@@ -120,20 +121,22 @@ const  PetitionView = () => {
     }, [petition.categoryId, petition.petitionId, petition.ownerId])
 
     return ( errorFlag ? <div> {errorMessage}</div> :
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-7">
 
-        
-
-        <div className="flex flex-row gap-5"> 
-            <div className="w-fit h-fit shadow-lg rounded-xl">
-            <img src={heroPetitionImage} className=" w-[500px] rounded-xl" /> 
-            </div>
-
-            <div className="grid grid-rows-3 w-[100%] gap-4 bg-white rounded-xl shadow-lg justify-evenly p-2">
-                <div className="flex  justify-center items-center">
-                    <h1 className="text-[2rem] font-semibold text-primary">{petition.title}</h1>
+            <div className="flex  justify-center items-center">
+                    <h1 className="text-[2.8rem] font-bold text-primary">{petition.title}</h1>
               
                 </div>
+
+        <div className="flex gap-5"> 
+            <div className="h-fit shadow-lg rounded-xl w-[30%] bg-white">
+            <img src={heroPetitionImage} alt={petition.petitionId.toString()} className=" w-full rounded-xl" /> 
+            </div>
+
+            <div className="flex flex-col w-[50%] gap-2 bg-white rounded-xl shadow-lg justify-evenly p-2">
+
+           
+                
                 <div className="flex flex-col gap-2  justify-center items-center">
                     <h2 className="text-secondary text-xl font-semibold">Description</h2>
                     <p>{petition.description}</p>
@@ -142,7 +145,7 @@ const  PetitionView = () => {
                 <div className=" grid grid-cols-3">
 
                     <div className="flex flex-col gap-2  justify-center items-center">
-                        <h2 className="text-secondary text-xl font-semibold">Total number of Supporter</h2>
+                        <h2 className="text-secondary text-xl font-semibold">Total Supporter</h2>
                         <p>{petition.numberOfSupporters}</p>
                     </div>
                     <div className="flex flex-col gap-2  justify-center items-center">
@@ -159,14 +162,9 @@ const  PetitionView = () => {
 
             </div>
 
-            
-            
-        </div>
-
-        <div className="flex gap-5">
-            <div className="grid grid-rows-2 w-[500px]  p-2 bg-white rounded-xl shadow-lg justify-evenly">
+            <div className="grid grid-rows-2 w-[20%] p-2 bg-white rounded-xl shadow-lg justify-evenly">
                 <div className=" flex justify-center items-center ">
-                    <img className="w-[150px] h-[150px] border-2 border-secondary  bg-gray-200 rounded-full object-contain " src={heroOwnerImage}/>
+                    <img alt={petition.ownerId.toString()} className="w-[150px] h-[150px] border-2 border-secondary  bg-gray-200 rounded-full object-contain " src={heroOwnerImage}/>
                 </div>
 
                 <div className="flex flex-col justify-evenly items-center">
@@ -184,9 +182,17 @@ const  PetitionView = () => {
 
             </div>
 
-            <div className="w-full p-2 flex flex-col gap-2 bg-white rounded-xl shadow-lg">
-                <h1 className="text-primary font-semibold text-[1.5rem]">Support Tiers</h1>
-                <div className=" grid grid-cols-3  border-t-2 pt-1 ">
+            
+            
+        </div>
+
+        <div className="flex flex-col gap-2">
+            <h1 className="text-primary font-semibold text-[2rem]">Support Tiers</h1>
+           
+
+            <div className="w-full p-3 flex flex-col gap-2 bg-white rounded-xl shadow-lg">
+               
+                <div className=" grid grid-cols-3   pt-1 ">
                         <h2 className="text-secondary text-xl font-semibold">Title</h2>
                         <h2 className="text-secondary text-xl font-semibold" >Description</h2>
                         <h2 className="text-secondary text-xl font-semibold">Cost</h2>
@@ -208,7 +214,7 @@ const  PetitionView = () => {
                             
                         
                               
-                                <p>${data.cost}</p>
+                                <p>{data.cost === 0 ? 'FREE' :'$' + data.cost}</p>
                         
 
                         </div>
@@ -217,6 +223,18 @@ const  PetitionView = () => {
 
                 </div>
             </div>
+
+            
+
+
+
+        </div>
+        <div className=" p-2 ">
+                <h2 className="text-primary font-semibold text-[1.7rem]">Supporter</h2>
+
+                <PetitionsSupporter  id={petition.petitionId} supporterTiers={petition.supportTiers}/>
+
+
         </div>
 
 

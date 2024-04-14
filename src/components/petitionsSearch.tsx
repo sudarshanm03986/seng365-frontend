@@ -21,7 +21,7 @@ const PetitionsSearch = (props:any) => {
     }
 
     return ( 
-        <div className="flex flex-row items-center gap-2 transition duration-300 p-2 rounded border-2 border-gray-300 hover:shadow-md hover:border-accent focus-within:shadow-md focus-within:border-accent w-96">
+        <div className="flex flex-row items-center bg-white gap-2 transition duration-300 p-2 rounded border-2 border-gray-300 hover:shadow-md hover:border-accent focus-within:shadow-md focus-within:border-accent w-96">
             <div className=" text-gray-400">
                 <FaSearch/>
             </div>
