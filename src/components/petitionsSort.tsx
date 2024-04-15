@@ -47,7 +47,7 @@ const PetitionsSort = (props:any) => {
     return ( 
         <div className="flex flex-row rounded border-2 border-gray-300">
             <p className="bg-gray-300  p-2 " >Sort by</p>
-            <select onChange={handleChange} className="  p-2">
+            <select onChange={handleChange} className=" rounded p-2">
                 <option>Oldest</option>
                 <option>Most Recent</option>
                 

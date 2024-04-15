@@ -230,7 +230,7 @@ const  PetitionView = () => {
 
         </div>
         <div className=" p-2 ">
-                <h2 className="text-primary font-semibold text-[1.7rem]">Supporter</h2>
+                <h2 className="text-primary font-semibold text-[2rem]">Supporter</h2>
 
                 <PetitionsSupporter  id={petition.petitionId} supporterTiers={petition.supportTiers}/>
 

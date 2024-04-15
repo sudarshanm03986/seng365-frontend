@@ -60,7 +60,7 @@ const PetitionsSupporter = (props:any) => {
         
         <div className="bg-white shadow-lg rounded-xl">
         <table className="w-full gap-2">
-            <tr className="text-secondary text-xl font-semibold">
+            <tr className="text-secondary text-xl font-thin">
                 <th className="py-3">Title</th>
                 <th>Message</th>
                 <th>Profile Picture</th>
