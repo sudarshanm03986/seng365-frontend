@@ -1,6 +1,6 @@
 import { useState } from "react";
 import PetitionsSupporter from "./petitionsSupporter";
-import { FaChevronDown } from "react-icons/fa";
+
 
 const PetitionsSupportTiers = (props: any) => {
 
@@ -8,7 +8,7 @@ const PetitionsSupportTiers = (props: any) => {
 
 
 
-    const [showSupporter, setShowSupporter] = useState(false);
+   
 
     return ( 
     <div>
@@ -31,10 +31,10 @@ const PetitionsSupportTiers = (props: any) => {
 
         </div> 
 
-        <div className="flex flex-col items-center pt-2">
-        <button onClick={()=> setShowSupporter(!showSupporter)} className="flex items-center  font-semibold gap-2 text-link hover:text-accent focus:text-accent duration-300 ">View Supporter <FaChevronDown /></button>
-        <PetitionsSupporter id={props.id} tierId={props.tierId} show={showSupporter} />
-        </div>
+        
+      
+        <PetitionsSupporter id={props.id} tierId={props.tierId}/>
+       
 
 </div>);
 }

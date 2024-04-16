@@ -6,6 +6,7 @@ import DefaultPetitionImg from './../assets/default_petiitio_img.jpg'
 import DefaultOwnerImg from './../assets/default_owner_img.png'
 import PetitionsSupporter from "./petitionsSupporter";
 import PetitionsSupportTiers from "./petitionsSupportTiers";
+import PetitionsSimilar from "./petiitionsSimilar";
 
 const  PetitionView = () => {
 
@@ -217,13 +218,13 @@ const  PetitionView = () => {
 
 
         </div>
-        {/* <div className=" p-2 ">
-                <h2 className="text-primary font-semibold text-[2rem]">Supporter</h2>
+        <div className=" p-2 ">
+                <h2 className="text-primary font-semibold text-[2rem]">Similar Petitions</h2>
 
-                <PetitionsSupporter  id={petition.petitionId} supporterTiers={petition.supportTiers}/>
+                
+                <PetitionsSimilar id={petition.petitionId} ownerId={petition.ownerId} categoryId={petition.categoryId} />
 
-
-        </div> */}
+        </div>
 
 
 
