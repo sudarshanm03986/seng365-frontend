@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import DefaultPetitionImg from './../assets/default_petiitio_img.jpg'
 import DefaultOwnerImg from './../assets/default_owner_img.png'
 import PetitionsSupporter from "./petitionsSupporter";
+import PetitionsSupportTiers from "./petitionsSupportTiers";
 
 const  PetitionView = () => {
 
@@ -192,10 +193,11 @@ const  PetitionView = () => {
 
             <div className="w-full p-3 flex flex-col gap-2 bg-white rounded-xl shadow-lg">
                
-                <div className=" grid grid-cols-3   pt-1 ">
+                <div className=" grid grid-cols-3  pt-1 ">
                         <h2 className="text-secondary text-xl font-semibold">Title</h2>
                         <h2 className="text-secondary text-xl font-semibold" >Description</h2>
                         <h2 className="text-secondary text-xl font-semibold">Cost</h2>
+                       
                     </div>
 
 
@@ -203,21 +205,7 @@ const  PetitionView = () => {
                     
                     {petition.supportTiers.map( (data:supportTiers) => {
 
-                        return <div className="grid grid-cols-3 gap-1 border-t-2 pt-1 ">
-                            
-                                
-                                <p>{data.title}</p>
-                            
-                        
-                                
-                                <p>{data.description}</p>
-                            
-                        
-                              
-                                <p>{data.cost === 0 ? 'FREE' :'$' + data.cost}</p>
-                        
-
-                        </div>
+                        return <PetitionsSupportTiers data={data} id={petition.petitionId} tierId={data.supportTierId}/>
                         })}
                     
 
@@ -229,13 +217,13 @@ const  PetitionView = () => {
 
 
         </div>
-        <div className=" p-2 ">
+        {/* <div className=" p-2 ">
                 <h2 className="text-primary font-semibold text-[2rem]">Supporter</h2>
 
                 <PetitionsSupporter  id={petition.petitionId} supporterTiers={petition.supportTiers}/>
 
 
-        </div>
+        </div> */}
 
 
 

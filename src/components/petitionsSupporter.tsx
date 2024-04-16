@@ -10,7 +10,7 @@ import { FaChevronDown } from "react-icons/fa";
 
 const PetitionsSupporter = (props:any) => {
 
-    const [supporter, setSupporter] = useState <Array<Supporter>>([])
+    const [supporter, setSupporter] = useState <Array<Supporter>>([]);
 
 
     //========ERROR=======
@@ -26,7 +26,7 @@ const PetitionsSupporter = (props:any) => {
             axios.get(process.env.REACT_APP_DOMAIN +  '/petitions/' + props.id + '/supporters')
             .then((res) => {
 
-                setSupporter(res.data);
+                setSupporter(res.data.filter((data:supportTiers) => {return data.supportTierId === props.tierId}));
 
             }, (err) => {
 
@@ -42,38 +42,26 @@ const PetitionsSupporter = (props:any) => {
 
     }, [props])
 
-    const getTitle = (tierId:number) => {
-
-        for(const tier of props.supporterTiers) {
-
-            if (tierId === tier.supportTierId) {
-
-                return tier.title;
-            }
-        }
-
-    }
 
 
 
-    return ( 
+    return props.show ? ( 
         
-        <div className="bg-white shadow-lg rounded-xl">
-        <table className="w-full gap-2">
-            <tr className="text-secondary text-xl font-thin">
-                <th className="py-3">Title</th>
+        <div className=" bg-background w-[90%] float-right">
+        <table className="w-full table-fixed gap-2">
+            <tr className="text-accent text-sm font-thin">
+                {/* <th className="py-3">Title</th> */}
                 <th>Message</th>
                 <th>Profile Picture</th>
                 <th>Firstname</th>
                 <th>Lastname</th>
             </tr>
             
-                {supporter.map((data) => 
+               {supporter.map((data) => 
                 {
                 
                 
                 return (<tr className=" even:bg-gray-100 ">
-                    <td className="">{getTitle(data.supportTierId)}</td>
                     <td className="">{data.message}</td>
                     <td className="py-2 flex items-center justify-center"><SupporterImg className="w-20 h-20 rounded-full object-cover " id={data.supportId}/></td>
                     <td className="">{data.supporterFirstName}</td>
@@ -81,22 +69,22 @@ const PetitionsSupporter = (props:any) => {
 
                 </tr>) 
 
-                }
+                })}
+    
+                    
                 
 
 
 
-                )}
+                
+
                 
             
 
         </table>
-
-
-        {/* <button className="p-2 underline text-link hover:text-accent duration-300 ">More<FaChevronDown/></button> */}
         </div>
 
-     );
+     ): <></>;
 }
  
 export default PetitionsSupporter;
