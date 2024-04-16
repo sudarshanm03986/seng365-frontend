@@ -53,7 +53,7 @@ const PetitionsSupporter = (props:any) => {
         <button 
             onClick={()=> setShow(!show)}
             disabled={supporter.length === 0} 
-            className=" disabled:text-gray-200 text-link hover:text-accent flex items-center gap-1 font-semibold duration-300">{show ? <p>Hide Supporter</p> : <p>Show Supporter </p> }<FaChevronDown className={show ? "rotate-180 duration-300": "duration-300"}/></button>
+            className=" disabled:text-gray-200 disabled:font-normal text-link hover:text-accent flex items-center gap-1 font-semibold duration-300">{show ? <p>Hide Supporter</p> : <p>Show Supporter </p> }<FaChevronDown className={show ? "rotate-180 duration-300": "duration-300"}/></button>
         
         
         
