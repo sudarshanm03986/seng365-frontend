@@ -1,9 +1,18 @@
+import { useState } from "react";
+import { FaEye, FaEyeSlash} from "react-icons/fa";
+import FormInput from "../components/formInput";
 
 
 
 
 
 const Register = () => {
+
+    const [firstName, setFirstName] = useState('')
+    const [lastName, setLastName] = useState('')
+    const [seePassword, setSeePassword] = useState(false);
+
+
     return (  <div className="bg-background w-screen h-screen pt-28 flex flex-col gap-2 items-center ">
 
     <div>
@@ -13,20 +22,52 @@ const Register = () => {
 
     <div className="w-lg flex justify-center">
 
-        <div className="flex flex-col w-72 gap-2" >
+        <form className="flex flex-col w-[500px] gap-2" >
             
-            <div className="transtion duration-200 p-2 border-2 border-gray-300 rounded w-full focus-within:border-accent hover:border-accent hover:shadow-md focus-within:shadow-md">
-            <input type="text" placeholder="Enter username" className="appearance-none border-none focus:outline-none bg-transparent w-full" />
+            <div className="grid grid-cols-2 gap-2">
+                <FormInput 
+                    type='text' 
+                    placeholder='Enter first name' 
+                    label='First Name' 
+                    isRequired={true} 
+                    setValue={setFirstName}/>
+
+                <FormInput 
+                    type='text' 
+                    placeholder='Enter last name' 
+                    label='Last Name' 
+                    isRequired={true} 
+                    setValue={setLastName}/>
+
+                
             </div>
+            
+            <FormInput 
+                type='text' 
+                placeholder='Enter email' 
+                label='Email' 
+                isRequired={true} 
+                setValue={setLastName}/>
 
-            <div className="transtion duration-200 p-2 border-2 border-gray-300 rounded flex flex-row gap-1  focus-within:border-accent hover:border-accent hover:shadow-md focus-within:shadow-md">
-            {/* <input type={seePassword ? "text" : "password"} placeholder="Enter password" className="w-full appearance-none border-none focus:outline-none bg-transparent"/>
-            <button onClick={()=> setSeePassword(!seePassword)}className="transtion duration-200 text-link hover:text-accent ">{seePassword ? <FaEye/> : <FaEyeSlash/>}</button> */}
-            </div>
+            <FormInput 
+                type='password' 
+                placeholder='Enter Password' 
+                label='Password' 
+                isRequired={true} 
+                setValue={setLastName}/>
 
-            <button className="transtion duration-200 hover:shadow-md p-2 bg-gray-300 rounded hover:bg-accent hover:text-white" >Login</button>
 
-        </div>
+            <FormInput 
+             type='file' 
+             placeholder='Upload Profile Image' 
+             label='Upload Profile Image' 
+             isRequired={false} 
+             setValue={setLastName}/>
+            
+
+            <button type="submit" className="transtion duration-200 hover:shadow-md p-2 bg-gray-300 rounded hover:bg-accent hover:text-white" >Login</button>
+           
+        </form>
 
     </div>
 
