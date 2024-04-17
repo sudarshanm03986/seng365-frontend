@@ -2,17 +2,25 @@ import { useState } from "react";
 import { FaEye, FaEyeSlash} from "react-icons/fa";
 import FormInput from "../components/formInput";
 import axios from "axios";
+import { userLogin } from "../components/userLogin";
+import { useNavigate } from "react-router-dom";
 
-
+const isValidEmail = (email: string): boolean => {
+    // Regular expression for basic email validation
+    const emailRegex = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/i;
+    return emailRegex.test(email);
+  };
 
 
 
 const Register = () => {
 
+    const navigate = useNavigate();
     const [errors, setErrors] = useState<{
         [key: string]: string[];
       }>({});
 
+    
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [email, setEmail] = useState('')
@@ -24,6 +32,36 @@ const Register = () => {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
+         // Validation
+        const newErrors: { [key: string]: string[] } = {};
+
+        if (!firstName.trim()) {
+            newErrors.firstName = ["First name is required"];
+        }
+
+        if (!lastName.trim()) {
+            newErrors.lastName = ["Last name is required"];
+        }
+
+        if (!email.trim()) {
+            newErrors.email = ["Email is required"];
+          } else if (!isValidEmail(email)) {
+            newErrors.email = ["Invalid email format"];
+          }
+        
+          if (!password.trim()) {
+            newErrors.password = ["Password is required"];
+          } else if (password.length < 6) {
+            newErrors.password = ["Password must be at least 6 characters long"];
+          }
+
+        if (Object.keys(newErrors).length > 0) {
+            // If there are validation errors, setErrors and stop form submission
+            setErrors(newErrors);
+            return;
+        }
+
+
         const formData = {
             firstName : firstName,
             lastName : lastName,
@@ -34,15 +72,52 @@ const Register = () => {
         axios.post(process.env.REACT_APP_DOMAIN + '/users/register', formData)
         .then ((res) => {
 
-            console.log('wow');
+            userLogin(formData.email, formData.password);
+
+            
+            navigate('/');
+            window.location.reload();
+            
+
+            
 
         }, (err) => {
 
-            console.log(err);
+
+            switch (err.response.status) {
+                case 403:
+                    setErrors({email: ["Email already exists"]});
+                    break;
+                case 400:
+                    const newErrors: { [key: string]: string[] } = {};
+
+                    if (err.response.statusText.includes('firstName')) {
+                            newErrors.firstName = ["Invalid First Name"];
+                    }
+
+                    if (err.response.statusText.includes('lastName')) {
+                        newErrors.lastName = ["Invalid last Name"];
+                    }
+
+
+                    if (err.response.statusText.includes('email')) {
+                        newErrors.email = ["Invalid email"];
+                    }
+
+                    if (err.response.statusText.includes('password')) {
+                        newErrors.password = ["Invalid password"];
+                    }
+                    setErrors(newErrors);
+
+                    break;
+            }
+
             
 
+            
+            
         })
-        console.log(formData)
+       
 
     }
 
@@ -69,14 +144,16 @@ const Register = () => {
                     placeholder='Enter first name' 
                     label='First Name' 
                     isRequired={true} 
-                    setValue={setFirstName}/>
+                    setValue={setFirstName}
+                    error={errors.firstName}/>
 
                 <FormInput 
                     type='text' 
                     placeholder='Enter last name' 
                     label='Last Name' 
                     isRequired={true} 
-                    setValue={setLastName}/>
+                    setValue={setLastName}
+                    error={errors.lastName}/>
 
                 
             </div>
@@ -86,14 +163,16 @@ const Register = () => {
                 placeholder='Enter email' 
                 label='Email' 
                 isRequired={true} 
-                setValue={setEmail}/>
+                setValue={setEmail}
+                error={errors.email}/>
 
             <FormInput 
                 type='password' 
                 placeholder='Enter Password' 
                 label='Password' 
                 isRequired={true} 
-                setValue={setPassword}/>
+                setValue={setPassword}
+                error={errors.password}/>
 
 
             <FormInput 
