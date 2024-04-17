@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { FaEye, FaEyeSlash} from "react-icons/fa";
 import FormInput from "../components/formInput";
+import axios from "axios";
 
 
 
@@ -8,9 +9,47 @@ import FormInput from "../components/formInput";
 
 const Register = () => {
 
+    const [errors, setErrors] = useState<{
+        [key: string]: string[];
+      }>({});
+
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
-    const [seePassword, setSeePassword] = useState(false);
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [file, setFile] = useState('')
+
+
+
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        const formData = {
+            firstName : firstName,
+            lastName : lastName,
+            email : email,
+            password : password
+        }
+
+        axios.post(process.env.REACT_APP_DOMAIN + '/users/register', formData)
+        .then ((res) => {
+
+            console.log('wow');
+
+        }, (err) => {
+
+            console.log(err);
+            
+
+        })
+        console.log(formData)
+
+    }
+
+    
+
+
+    
 
 
     return (  <div className="bg-background w-screen h-screen pt-28 flex flex-col gap-2 items-center ">
@@ -22,7 +61,7 @@ const Register = () => {
 
     <div className="w-lg flex justify-center">
 
-        <form className="flex flex-col w-[500px] gap-2" >
+        <form onSubmit={handleSubmit} className="flex flex-col w-[500px] gap-2" >
             
             <div className="grid grid-cols-2 gap-2">
                 <FormInput 
@@ -47,14 +86,14 @@ const Register = () => {
                 placeholder='Enter email' 
                 label='Email' 
                 isRequired={true} 
-                setValue={setLastName}/>
+                setValue={setEmail}/>
 
             <FormInput 
                 type='password' 
                 placeholder='Enter Password' 
                 label='Password' 
                 isRequired={true} 
-                setValue={setLastName}/>
+                setValue={setPassword}/>
 
 
             <FormInput 
@@ -62,7 +101,7 @@ const Register = () => {
              placeholder='Upload Profile Image' 
              label='Upload Profile Image' 
              isRequired={false} 
-             setValue={setLastName}/>
+             setValue={setFile}/>
             
 
             <button type="submit" className="transtion duration-200 hover:shadow-md p-2 bg-gray-300 rounded hover:bg-accent hover:text-white" >Login</button>

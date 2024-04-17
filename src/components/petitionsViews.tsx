@@ -7,23 +7,31 @@ import PetitionsSearch from "./petitionsSearch";
 import PetitionsFilter from "./petitionsFilter";
 import PetitionsSort from "./petitionsSort";
 import PetitionsPagination from "./petitionsPagination";
+import Loading from "../layout/loading";
 
 
 const PetitionsView = () => {
 
     const [searchParams, setSearchParams] = useSearchParams();
     const [petitions, setPetitions] = useState<Array<Petitions>>([]);
-    const [currentPage, setCurrentPage] = useState(1);
+    // const [currentPage, setCurrentPage] = useState(1);
     const [numOfPetitions, setNumOfPetitions] = useState(0);
 
 
     //========ERROR=======
     const [errorFlag, setErrorFlag] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
+
+    const [loading, setLoading] = useState(true);
     
 
 
     useEffect(() => {
+
+        setTimeout(() => {
+            // setData('Loaded data');
+            setLoading(false);
+          }, 2000); // Simulating a 2-second delay
 
         const getParams = () => {
 
@@ -59,9 +67,11 @@ const PetitionsView = () => {
                 setPetitions(res.data.petitions);
                 setNumOfPetitions(res.data.count);
                
+               
             }, (err) => {
                 setErrorFlag(true);
                 setErrorMessage(err.toString());
+                
             })
 
 
@@ -84,7 +94,7 @@ const PetitionsView = () => {
 
     }
 
-    return ( errorFlag ? <div> {errorMessage}</div> :
+    return loading ? <Loading /> : ( errorFlag ? <div> {errorMessage}</div> :
         <div className="flex flex-col gap-3 py-3"> 
             <div className="flex items-center justify-between gap-2">
                 <div className="flex gap-2">
