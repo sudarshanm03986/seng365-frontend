@@ -31,7 +31,7 @@ const PetitionsView = () => {
         setTimeout(() => {
             // setData('Loaded data');
             setLoading(false);
-          }, 2000); // Simulating a 2-second delay
+          }, 1500); // Simulating a 2-second delay
 
         const getParams = () => {
 

@@ -1,25 +1,46 @@
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { BsPersonFill } from "react-icons/bs";
+import axios from "axios";
+
+import DefaultOwnerImg from './../assets/default_owner_img.png';
 
 
 const Nav = () => {
     const location = useLocation();
     const [showUserMenu, setShowUserMenu] = useState(false);
+    const [heroOwnerImage, setHeroOwnerImage] = useState("");
 
     const notActive = "transition duration-300 w-fit text-link font-semibold hover:text-accent"
     const active = "transition duration-300 w-fit text-secondary font-semibold"
 
+    const navigate = useNavigate();
 
     useEffect(() => {
-        document.addEventListener('mousedown', () => setShowUserMenu(false));
-        document.addEventListener('scroll', () => setShowUserMenu(false));
+        const getOwnerImage = () => {
+            axios.get(process.env.REACT_APP_DOMAIN + '/users/' + localStorage.getItem('userId') + '/image', { responseType: 'blob'}) 
+            .then((res) => {
+
+                const imageUrl = URL.createObjectURL(res.data);
+                setHeroOwnerImage(imageUrl);
+
+                
+            }, (err) => {
+
+                setHeroOwnerImage(DefaultOwnerImg);
+                
+            })
+
+            
+
+        }
+
+        if (localStorage.getItem('token') && localStorage.getItem('userId')) {
+            getOwnerImage();
+        }
     
-        return () => {
-          document.removeEventListener('mousedown',  () => setShowUserMenu(false));
-          document.removeEventListener('scroll', () => setShowUserMenu(false));
-        };
-      }, []);
+    })
+
 
 
 
@@ -27,9 +48,8 @@ const Nav = () => {
     const userImage = () => {
 
 
-        return <div className="">
-
-            <BsPersonFill  className="text-[2rem]"/>
+        return <div className=" w-8  h-8 overflow-hidden ">
+            <img className="w-full" src={heroOwnerImage} />
         </div>
     }
     return ( 
@@ -76,7 +96,7 @@ const Nav = () => {
                         {showUserMenu ? 
                         <div className="fixed h-fit translate-y-[3.9rem] -translate-x-10  bg-background w-[8rem] shadow-md flex flex-col border-[1px] border-gray-300 sl">
                             <button className=" transition duration-300 p-2 text-link hover:bg-accent hover:text-white">Profile</button>
-                            <button className=" transition duration-300 p-2 text-link hover:bg-accent hover:text-white">Logout</button>
+                            <button onClick={()=> {localStorage.removeItem('token'); localStorage.removeItem('userId'); navigate('/');window.location.reload();}} className=" transition duration-300 p-2 text-link hover:bg-accent hover:text-white">Logout</button>
 
 
                         </div> : ''}

@@ -84,12 +84,27 @@ const Register = () => {
                 localStorage.setItem('userId', response.data.userId);
 
                 if (file) {
-                    // axios.put()
                     console.log(file);
+                    const contentType = file.type;
+                    axios.put(process.env.REACT_APP_DOMAIN + '/users/'+ response.data.userId + '/image', 
+                        file, 
+                        {headers: 
+                            {   "Content-Type" : contentType, 
+                                "x-authorization" : localStorage.getItem('token')
+                            }
+                        }
+                    )
+                    .then ((responses) => {
+                        navigate('/');
+                    }, (err) => {
+
+                        console.log(err)
+                    })  
+                    
 
                 }
-                navigate('/');
-                window.location.reload();
+                // navigate('/');
+                // window.location.reload();
 
 
             }, (err) => {
@@ -98,10 +113,7 @@ const Register = () => {
             } )
 
             
-            
-            
 
-            
 
         }, (err) => {
 
