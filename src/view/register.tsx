@@ -25,7 +25,7 @@ const Register = () => {
     const [lastName, setLastName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [file, setFile] = useState('')
+    const [file, setFile] = useState<File>()
 
 
 
@@ -72,11 +72,33 @@ const Register = () => {
         axios.post(process.env.REACT_APP_DOMAIN + '/users/register', formData)
         .then ((res) => {
 
-            userLogin(formData.email, formData.password);
 
             
-            navigate('/');
-            window.location.reload();
+            axios.post(process.env.REACT_APP_DOMAIN + '/users/login', 
+                {   email: formData.email,
+                    password: formData.password
+                  } )
+            .then ((response)=> {
+
+                localStorage.setItem('token', response.data.token);
+                localStorage.setItem('userId', response.data.userId);
+
+                if (file) {
+                    // axios.put()
+                    console.log(file);
+
+                }
+                navigate('/');
+                window.location.reload();
+
+
+            }, (err) => {
+
+                console.log(err);
+            } )
+
+            
+            
             
 
             
@@ -186,6 +208,8 @@ const Register = () => {
             <button type="submit" className="transtion duration-200 hover:shadow-md p-2 bg-gray-300 rounded hover:bg-accent hover:text-white" >Login</button>
            
         </form>
+
+
 
     </div>
 

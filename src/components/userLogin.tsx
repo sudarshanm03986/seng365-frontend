@@ -15,16 +15,18 @@ const userLogin = (email: string, password: string) => {
         localStorage.setItem('userId', res.data.userId)
         localStorage.setItem('token', res.data.token)
 
-        return res.data;
+        
         
 
     }, (err) => {
 
-        throw err
+        
     })
     
     
 
 }
+
+
  
 export {userLogin};
