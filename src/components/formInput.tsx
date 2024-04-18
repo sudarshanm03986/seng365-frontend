@@ -15,9 +15,10 @@ const FormInput = (props:any) => {
             <div className="text-left">
 
                 <label className=" font-medium text-secondary">{props.label}</label>
-                <div className="transtion duration-200 p-2 border-2 bg-white border-gray-300 rounded w-full focus-within:border-accent hover:border-accent hover:shadow-md focus-within:shadow-md ">
+                <div className={` transtion duration-200 p-2 bg-white border-2 ${props.error ? "border-red-300" : "border-gray-300 " }  rounded w-full  hover:shadow-md focus-within:shadow-md `}>
                     <input onChange={(e) => props.setValue(e.target.files?.[0] as File)} type="file" accept="image/png,image/gif,image/jpeg, image/jpg" placeholder="Upload you profile image " className="appearance-none border-none focus:outline-none bg-transparent w-full" />
                 </div>
+                <span className="text-red-500">{props.error}</span>
             </div>
             );
         } else if (props.type === "password") {

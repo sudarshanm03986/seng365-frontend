@@ -1,8 +1,7 @@
 import { useState } from "react";
-import { FaEye, FaEyeSlash} from "react-icons/fa";
 import FormInput from "../components/formInput";
 import axios from "axios";
-import { userLogin } from "../components/userLogin";
+
 import { useNavigate } from "react-router-dom";
 
 const isValidEmail = (email: string): boolean => {
@@ -49,11 +48,18 @@ const Register = () => {
             newErrors.email = ["Invalid email format"];
           }
         
-          if (!password.trim()) {
+        if (!password.trim()) {
             newErrors.password = ["Password is required"];
-          } else if (password.length < 6) {
+        } else if (password.length < 6) {
             newErrors.password = ["Password must be at least 6 characters long"];
-          }
+        }
+
+
+        if (file && !(['image/png', 'image/gif', 'image/jpg', 'image/jpeg'].includes(file.type))) {
+            
+            newErrors.file = ['File type invalid, Valid file are PNG, GIF and JPEG'];
+     
+        }
 
         if (Object.keys(newErrors).length > 0) {
             // If there are validation errors, setErrors and stop form submission
@@ -96,24 +102,35 @@ const Register = () => {
                     )
                     .then ((responses) => {
                         navigate('/');
+                        window.location.reload();
+                        
                     }, (err) => {
 
                         console.log(err)
-                    })  
-                    
+                        navigate('/');
+                        window.location.reload();
 
-                }
-                // navigate('/');
-                // window.location.reload();
+                    }) 
 
+
+                    } else {
+                        navigate('/');
+                        window.location.reload();
+
+                    }
+
+                
+        
 
             }, (err) => {
 
                 console.log(err);
+                navigate('/');
+                window.location.reload();
             } )
 
             
-
+            
 
         }, (err) => {
 
@@ -214,7 +231,8 @@ const Register = () => {
              placeholder='Upload Profile Image' 
              label='Upload Profile Image' 
              isRequired={false} 
-             setValue={setFile}/>
+             setValue={setFile}
+             error={errors.file}/>
             
 
             <button type="submit" className="transtion duration-200 hover:shadow-md p-2 bg-gray-300 rounded hover:bg-accent hover:text-white" >Login</button>

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { BsPersonFill } from "react-icons/bs";
+
 import axios from "axios";
 
 import DefaultOwnerImg from './../assets/default_owner_img.png';
@@ -49,7 +49,7 @@ const Nav = () => {
 
 
         return <div className=" w-8  h-8 overflow-hidden ">
-            <img className="w-full" src={heroOwnerImage} />
+            <img className="w-full h-full object-cover" alt={localStorage.getItem('userId')?.toString()} src={heroOwnerImage} />
         </div>
     }
     return ( 
