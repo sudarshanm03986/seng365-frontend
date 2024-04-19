@@ -24,6 +24,9 @@ function App() {
             <Route path="/register" element={<Register/>}/>
             <Route path="/petitions" element={<Petitions/>}/>
             <Route path="/petitions/:id" element={<Petition/>}/>
+{/* 
+            {!localStorage.getItem('token') && !localStorage.getItem('userId') ?  <Route path="/login" element={<Login/>}/> : ""}
+            {!localStorage.getItem('token') && !localStorage.getItem('userId') ? <Route path="/register" element={<Register/>} />: ""} */}
 
 
             <Route path="*" element={<NotFound/>}/>
