@@ -20,8 +20,7 @@ function App() {
           <Nav/>
           <Routes>
             <Route path="/" element={<Landing/>}/>
-            {/* <Route path="/login" element={<Login/>}/>
-            <Route path="/register" element={<Register/>}/> */}
+            
             <Route path="/petitions" element={<Petitions/>}/>
             <Route path="/petitions/:id" element={<Petition/>}/>
 

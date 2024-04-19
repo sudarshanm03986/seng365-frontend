@@ -64,7 +64,8 @@ const Nav = () => {
                 <h1 className="text-primary font-bold text-[2rem]">Petition</h1>
                 <a className={location.pathname === '/' ? active : notActive} href="/">Home</a>
                 <a className={location.pathname === '/petitions' ? active : notActive} href="/petitions">Petitions</a>
-                <a className={location.pathname === '/supporter' ? active : notActive} href="/supporter">Supporter</a>
+                <a className={location.pathname === '/myPetitions' ? active : notActive} href="/myPetitions">My petitions</a>
+                <a className={location.pathname === '/addPetitions' ? active : notActive} href="/addPetitions">Start a petition</a>
                 
               
             </div>
