@@ -5,3 +5,11 @@ type supportTiers = {
     "supportTierId": number
 
 }
+
+
+type newSupportTiers = {
+    "title": string,
+    "description": string,
+    "cost": number,
+
+}
