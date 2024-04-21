@@ -25,6 +25,13 @@ type Petition = {
     "supportTiers": supportTiers[]
 }
 
+type addPetiton = {
+    "title": string,
+    "description": string,
+    "categoryId": number,
+    "supportTiers" : newSupportTiers[]
+}
+
 type Category = {
     "categoryId": number,
     "name" : string

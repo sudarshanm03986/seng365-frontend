@@ -78,7 +78,7 @@ const PetitionsCard = (props: any) => {
             <div className="flex px-4 gap-5 items-center ">
 
                
-                <img src={heroOwnerImage} alt={props.petitions.petiitonId} className="rounded-full w-10 h-10 object-contain"></img>
+                <img src={heroOwnerImage} alt={props.petitions.petiitonId} className="rounded-full w-12 h-12 object-cover border-2 border-secondary"></img>
                
 
                 <div className="flex flex-col text-left text-sm" >

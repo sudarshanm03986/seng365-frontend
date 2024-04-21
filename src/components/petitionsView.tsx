@@ -131,8 +131,8 @@ const  PetitionView = () => {
                 </div>
 
         <div className="flex gap-5"> 
-            <div className="h-fit shadow-lg rounded-xl w-[30%] bg-white">
-            <img src={heroPetitionImage} alt={petition.petitionId.toString()} className=" w-full rounded-xl" /> 
+            <div className=" h-[384px] shadow-lg rounded-xl w-[384px] bg-white overflow-hidden">
+            <img src={heroPetitionImage} alt={petition.petitionId.toString()} className=" w-full h-full object-cover  rounded-xl" /> 
             </div>
 
             <div className="flex flex-col w-[50%] gap-2 bg-white rounded-xl shadow-lg justify-evenly p-2">

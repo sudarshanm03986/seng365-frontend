@@ -14,9 +14,9 @@ const FormInput = (props:any) => {
             return (
             <div className="text-left">
 
-                <label className=" font-medium text-secondary">{props.label}</label>
+                <label className=" font-medium text-secondary">{props.label} {props.isRequired ? '*': ''}</label>
                 <div className={` transtion duration-200 p-2 bg-white border-2 ${props.error ? "border-red-300" : "border-gray-300 " }  rounded w-full  hover:shadow-md focus-within:shadow-md `}>
-                    <input onChange={(e) => props.setValue(e.target.files?.[0] as File)} type="file" accept="image/png,image/gif,image/jpeg, image/jpg" placeholder="Upload you profile image " className="appearance-none border-none focus:outline-none bg-transparent w-full" />
+                    <input required={props.isRequired} onChange={(e) => props.setValue(e.target.files?.[0] as File)} type="file" accept="image/png,image/gif,image/jpeg, image/jpg" placeholder="Upload you profile image " className="appearance-none border-none focus:outline-none bg-transparent w-full" />
                 </div>
                 <span className="text-red-500">{props.error}</span>
             </div>
