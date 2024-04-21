@@ -40,7 +40,7 @@ const AddPetitions = () => {
     }, [])
 
     return ( 
-    <div className="pt-20 w-full h-fit min-h-screen bg-background flex justify-center">
+    <div className="pt-20 pb-10 w-full h-fit min-h-screen bg-background flex justify-center">
 
         <div className="xl:w-xl  w-full  flex py-2 flex-col items-center gap-5 "> 
 
@@ -80,8 +80,10 @@ const AddPetitions = () => {
                 </select>
             </div>
 
-            <AddSupportTier aupportTiers={supportTiers} setSupportTiers={setSupportTiers}/>
-            
+            <div  className="flex flex-col text-left">
+            <label className=" font-medium text-secondary" >Support Tiers</label>
+            <AddSupportTier supportTiers={supportTiers} setSupportTiers={setSupportTiers}/>
+            </div>
             <FormInput 
              type='file' 
              placeholder='Upload Petition Image' 
@@ -91,6 +93,7 @@ const AddPetitions = () => {
              error={errors.file}/>
 
             
+            <button type="submit" className="p-2 bg-gray-300 rounded hover:bg-accent hover:text-white duration-300">Upload</button>
 
 
         </form>
