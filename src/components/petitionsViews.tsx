@@ -10,7 +10,7 @@ import PetitionsPagination from "./petitionsPagination";
 import Loading from "../layout/loading";
 
 
-const PetitionsView = () => {
+const PetitionsView = (props: any) => {
 
     const [searchParams, setSearchParams] = useSearchParams();
     const [petitions, setPetitions] = useState<Array<Petitions>>([]);
@@ -52,7 +52,9 @@ const PetitionsView = () => {
 
             query += (searchParams.get('startIndex') ? `&startIndex=${searchParams.get('startIndex')}` : "&startIndex=0");
 
+            query += (props.ownerId ? `&ownerId=${props.ownerId}` : "")
 
+            query += (props.supportId ? `&supporterId=${props.supportId}` : "")
 
             return query;
 
@@ -79,7 +81,7 @@ const PetitionsView = () => {
 
     getPetitons();
 
-    }, [searchParams])
+    }, [searchParams, props])
 
     const display_all_petitions = () =>{
 

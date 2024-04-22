@@ -32,6 +32,13 @@ type addPetiton = {
     "supportTiers" : newSupportTiers[]
 }
 
+type editPetiton = {
+    "title": string,
+    "description": string,
+    "categoryId": number,
+}
+
+
 type Category = {
     "categoryId": number,
     "name" : string

@@ -1,16 +1,22 @@
 import axios from "axios";
 import { useEffect , useState} from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import DefaultPetitionImg from './../assets/default_petiitio_img.jpg'
 import DefaultOwnerImg from './../assets/default_owner_img.png'
-import PetitionsSupporter from "./petitionsSupporter";
+import { MdDelete } from "react-icons/md";
+import { FaRegEdit } from "react-icons/fa";
+
 import PetitionsSupportTiers from "./petitionsSupportTiers";
 import PetitionsSimilar from "./petiitionsSimilar";
+import Alert from "../layout/alert";
+import EditPetitions from "./editPetitions";
 
 const  PetitionView = () => {
 
     const {id} = useParams();
+
+    const navigate = useNavigate();
 
     const [heroPetitionImage, setHeroPetitionImage] = useState("");
     const [heroOwnerImage, setHeroOwnerImage] = useState("");
@@ -19,6 +25,10 @@ const  PetitionView = () => {
     //========ERROR=======
     const [errorFlag, setErrorFlag] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
+
+    //=======Pop up=========
+    const [remove, setRemove] = useState(false);
+    const [edit, setEdit] = useState(false);
 
 
 
@@ -96,38 +106,93 @@ const  PetitionView = () => {
         }
 
 
-        const getCategory = () => {
-            axios.get(process.env.REACT_APP_DOMAIN + '/petitions/categories') 
-            .then((res) => {
 
-                for(const category of res.data) {
-
-                    if (category.categoryId === petition.categoryId ) {
-                        setCategoryName(category.name);
-                    }
-                }
-                
-                
-            }, (err) => {
-
-                console.log(err)
-                
-            })
-
-        }
-
-        getCategory();
         getPetitionImage();
         getOwnerImage();
 
     }, [petition.categoryId, petition.petitionId, petition.ownerId])
 
-    return ( errorFlag ? <div> {errorMessage}</div> :
+
+    const handleTriggerDelete = () => {
+
+        axios.delete(process.env.REACT_APP_DOMAIN + '/petitions/' + petition.petitionId, 
+            {headers: 
+                {  
+                    "x-authorization" : localStorage.getItem('token')
+                }
+        })
+        .then ((res) => {
+            
+
+            navigate('/myPetitions');
+            window.location.reload();
+
+
+        }, (err) => {
+
+            switch (err.response.status) { 
+                case 401:
+                    localStorage.removeItem('token');
+                    localStorage.removeItem('userId');
+                   
+                    window.location.reload();
+                    break;
+
+                case 403:
+                    setErrorFlag(true);
+                    setErrorMessage(err.toString());
+                    break;
+
+                case 404:
+                    setErrorFlag(true);
+                    setErrorMessage(err.toString());
+                    break;
+            }
+
+        } )
+
+
+        
+
+    }
+
+
+
+    const alertRemove = () =>  {
+
+        return <Alert>
+
+            <div className="w-[400px] h-fit bg-background rounded p-2 flex flex-col gap-10">
+                <p className="font-semibold">This action can not be undone.<br/> Are you sure you want to delete this Petition?</p>
+
+                <div className="flex flex-row justify-evenly">
+                    <button onClick={()=> setRemove(false)} className="p-2 bg-gray-300 rounded hover:bg-accent duration-300 hover:shadow">Cancel</button>
+                    <button onClick={handleTriggerDelete} className="p-2 bg-secondary text-white rounded  hover:bg-red-500 duration-300 hover:shadow">Delete</button>
+                </div>
+            </div>
+
+            
+        </Alert>
+    } 
+
+
+    
+
+    return ( errorFlag ? <div> {errorMessage} </div> :
     <div className="flex flex-col gap-7">
 
-            <div className="flex  justify-center items-center">
+        {remove ? alertRemove() : ""}
+        {edit ? <EditPetitions petition={petition} setTrigger={setEdit} /> : ""}
+            <div className="grid grid-cols-3  justify-center items-center">
+                    <div>
+                    </div>
                     <h1 className="text-[2.8rem] font-bold text-primary">{petition.title}</h1>
-              
+                    { localStorage.getItem('token') && localStorage.getItem('userId') && parseInt(localStorage.getItem('userId') || '', 10) === petition.ownerId ?  <div className="flex justify-end text-[1.8rem] gap-2">
+                        <button onClick={()=> setEdit(true)} className="hover:text-accent duration-300 text-link"><FaRegEdit/></button>
+                        <button onClick={()=> setRemove(true)} className="hover:text-red-500 duration-300 text-link"><MdDelete/></button>
+
+                    </div> : <div></div>}
+
                 </div>
 
         <div className="flex gap-5"> 

@@ -154,6 +154,8 @@ const AddPetitions = () => {
             switch (err.response.status) {
                 case 400:
                     const newErrors: { [key: string]: string[] } = {};
+                    const newTierErrors:{ [key: number]: {[key:string] : string[]} }= {};
+
 
                     if (err.response.statusText.includes('data/title')) {
                         newErrors.title = ["Invalid Title"];
@@ -169,12 +171,15 @@ const AddPetitions = () => {
 
                     if (err.response.statusText.includes('data/supportTiers')) {
                         newErrors.supportTiers  = ["Invalid Support Tiers"];
+                    } 
+
+                    if (err.response.statusText.includes('supportTiers must have unique titles') ) {
+                        newErrors.supportTiers = ["The Support Tiers must have unique titles"];
                     }
 
                     setErrors(newErrors);
 
-                    const newTierErrors:{ [key: number]: {[key:string] : string[]} }= {};
-
+                    
                     for (let i = 0; i < supportTiers.length; i++ ) { 
 
 
@@ -258,7 +263,7 @@ const AddPetitions = () => {
 
             <div className="flex flex-col text-left">
             <label className=" font-medium text-secondary">Category *</label>
-                <select onChange={(e)=> setCategoryId(parseInt(e.target.value, 10)) }className="rounded p-2 bg-white border-gray-300 border-2 text-gray">
+                <select onChange={(e)=> setCategoryId(parseInt(e.target.value, 10)) }className={`rounded p-2 bg-white ${errors.categoryId ? 'border-red-500' : 'border-gray-300 '} border-2 text-gray`}>
                     <option selected value={-1}>Choose a category</option>
                     {category.map((data) => <option value={data.categoryId}>{data.name}</option>)}
                 </select>

@@ -6,10 +6,6 @@ import { MdDelete } from "react-icons/md";
 
 const AddSupportTier = (props:any) => {
 
-    // const [title, setTitle] = useState('');
-    // const [description, setDescription] = useState('');
-    // const [cost, setCost] = useState(0);
-
     const [tierErrors, setTierErrors] = useState<{
         [key: number]: {[key:string] : string[]};
       }>({});
@@ -61,13 +57,13 @@ const AddSupportTier = (props:any) => {
             {props.supportTiers?.map((data:newSupportTiers, index:number) => 
             <form className={` bg-gray-200 rounded  flex flex-col gap-2 p-2 ${tierErrors[index] ? 'border-red-500 border-2' : ''}`}>
                 <div className="flex justify-between items-center">
-                    <h2>Support Tier {index +1}</h2>
+                    <h2 className="">Support Tier {index +1}</h2>
                     <button type='button' onClick={() => remove(index) } className="text-[1.3rem] hover:text-red-500 duration-300 "><MdDelete/></button>
                 </div>
                 <div className="text-left">
                     <label className="font-medium text-secondary">Title *</label>
                     <input 
-                    className="transtion duration-200 p-2 bg-white border-2 border-gray-300  rounded w-full  hover:shadow-md focus-within:shadow-md  "
+                    className={`transtion duration-200 p-2 bg-white border-2 ${tierErrors[index] && tierErrors[index].title ? 'border-red-500' :'border-gray-300'}  rounded w-full  hover:shadow-md focus-within:shadow-md `}
                     type='text'
                     placeholder='Enter title'
                     name="title"
@@ -83,7 +79,7 @@ const AddSupportTier = (props:any) => {
                     <textarea 
                     cols={50}
                     rows={4}
-                    className="transtion duration-200 p-2 bg-white border-2 border-gray-300  rounded w-full  hover:shadow-md focus-within:shadow-md  "
+                    className={`transtion duration-200 p-2 bg-white border-2 ${tierErrors[index] && tierErrors[index].description ? 'border-red-500' :'border-gray-300'}  rounded w-full  hover:shadow-md focus-within:shadow-md `}
                     name="description"
                     placeholder='Enter description'
                     required
@@ -97,7 +93,7 @@ const AddSupportTier = (props:any) => {
                     <label className="font-medium text-secondary">Cost *</label>
                 
                     <input 
-                        className="transtion duration-200 p-2 bg-white border-2 border-gray-300  rounded w-full  hover:shadow-md focus-within:shadow-md  "
+                         className={`transtion duration-200 p-2 bg-white border-2 ${tierErrors[index] && tierErrors[index].cost ? 'border-red-500' :'border-gray-300'}  rounded w-full  hover:shadow-md focus-within:shadow-md `}
                         type='number'
                         placeholder='Enter cost'
                         name="cost"
