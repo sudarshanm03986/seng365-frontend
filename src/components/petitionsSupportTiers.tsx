@@ -113,7 +113,7 @@ const PetitionsSupportTiers = (props: any) => {
                 <button disabled={props.disabled} onClick={()=>setAlertDelete(true)} className="text-[1.2rem] disabled:bg-link disabled:text-gray-300 hover:bg-red-500  hover:text-white bg-gray-300 py-2 px-2 rounded duration-300 text-black flex items-center justify-center gap-2 "><MdDelete/></button>
             </div> : <div className="absolute right-1 top-4 flex gap-2 h-full items-center">
 
-                    <AddSupporter tierId={data.supportTierId}  petitionId={props.petitionId} ownerId={props.ownerId}/>
+                    <AddSupporter tierId={data.supportTierId} title={data.title} petitionId={props.petitionId} ownerId={props.ownerId}/>
                     
                 </div>}
 

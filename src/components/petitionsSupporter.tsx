@@ -76,7 +76,7 @@ const PetitionsSupporter = (props:any) => {
                 
                 return (<div className="flex gap-2">
                     <div>
-                    <SupporterImg className="w-10 h-10 rounded-full object-cover " id={data.supportId}/>
+                    <SupporterImg className="w-10 h-10 rounded-full object-cover " id={data.supporterId}/>
                     </div>
 
                     <div className="flex flex-col bg-gray-200 p-2 w-[90%] shadow-sm rounded-md items-start ">
