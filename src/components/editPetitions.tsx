@@ -10,7 +10,7 @@ const EditPetitions = (props:any) => {
 
     const [category, setCategory] = useState<Array<Category>>([]);
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const [errors, setErrors] = useState<{
         [key: string]: string[];
       }>({});
@@ -24,7 +24,7 @@ const EditPetitions = (props:any) => {
     const [title, setTitle] = useState('');
     const [description , setDescription ] = useState('');
     const [categoryId , setCategoryId ] = useState(props.petition.categoryId);
-    const [file, setFile] = useState<File>()
+    
 
     useEffect(() => {
 
@@ -51,21 +51,16 @@ const EditPetitions = (props:any) => {
         e.preventDefault(); 
 
 
-        const newErrors: { [key: string]: string[] } = {};
+        // const newErrors: { [key: string]: string[] } = {};
     
 
-       
-        if (file && !(['image/png', 'image/gif', 'image/jpg', 'image/jpeg'].includes(file.type))) {
-            
-            newErrors.file = ['File type invalid, Valid file are PNG, GIF and JPEG'];
-     
-        }
+    
 
-        if (Object.keys(newErrors).length > 0) {
-            // If there are validation errors, setErrors and stop form submission
-            setErrors(newErrors);
-            return;
-        }
+        // if (Object.keys(newErrors).length > 0) {
+        //     // If there are validation errors, setErrors and stop form submission
+        //     setErrors(newErrors);
+        //     return;
+        // }
 
 
         const patchPetition  = {
@@ -85,9 +80,11 @@ const EditPetitions = (props:any) => {
         })
         .then((res) => {
 
-            //for now
-            props.setTrigger(false);
-            window.location.reload();
+           
+
+                props.setTrigger(false);
+                window.location.reload();
+
 
 
         },(err) => {
@@ -148,7 +145,7 @@ const EditPetitions = (props:any) => {
 
 
     return ( <Alert>
-                <div className="bg-background w-[600px] rounded px-2 py-5 flex flex-col items-center overflow-y-scroll">
+                <div className="bg-background w-[600px] rounded px-2 py-5 h-fit flex flex-col items-center ">
 
                     <div className="py-4">
                         <h1 className="text-[1.6rem] font-semibold text-primary">Edit Petition</h1>
@@ -185,22 +182,8 @@ const EditPetitions = (props:any) => {
                     </div>
 
 
-                    <div  className="flex flex-col text-left">
-                    <label className=" font-medium text-secondary" >Support Tiers</label>
-                    
-                    <p>Edit Support Tiers in the Suppor Tier Section</p>
-                    
-                    </div>
 
-                    <FormInput 
-                        type='file' 
-                        placeholder='Upload Petition Image' 
-                        label='Upload Petition Image' 
-                        isRequired={false} 
-                        setValue={setFile}
-                        error={errors.file}/>
-
-                    <div className="grid grid-cols-2 gap-2">
+                    <div className="grid grid-cols-2 gap-2 py-3">
                     <button onClick={()=> props.setTrigger(false)} type="button" className="p-2 bg-gray-300 rounded hover:bg-accent hover:text-white duration-300">Cancel</button>
                     <button type="submit" className="p-2 bg-secondary text-white rounded hover:bg-accent hover:text-white duration-300">Update</button>
                       

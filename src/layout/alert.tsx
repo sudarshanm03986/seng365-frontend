@@ -1,6 +1,6 @@
 const Alert = (props:any) => {
     return ( 
-    <div className="w-screen h-screen fixed bg-link top-0 left-0 z-20  bg-opacity-50 flex justify-center p-2 ">
+    <div className="w-screen h-screen fixed bg-link top-0 left-0 z-20  bg-opacity-50 backdrop-blur-[1px] flex justify-center p-2 ">
 
        {props.children}
 
@@ -9,4 +9,4 @@ const Alert = (props:any) => {
      );
 }
  
-export default Alert;
+export default Alert
