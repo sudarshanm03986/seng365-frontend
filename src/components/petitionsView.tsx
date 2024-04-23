@@ -464,7 +464,7 @@ const alertAddTiers = () => {
                     </div>
                     <div className="flex flex-col gap-2  justify-center items-center">
                         <h2 className="text-secondary text-xl font-semibold">Total money raised</h2>
-                        <p>${petition.moneyRaised}</p>
+                        <p>${petition.moneyRaised ? petition.moneyRaised : 0}</p>
                     </div>
 
                     <div className="flex flex-col gap-2  justify-center items-center">

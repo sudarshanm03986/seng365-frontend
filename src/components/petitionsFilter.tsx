@@ -70,8 +70,8 @@ const PetitionsFilter = (props:any) => {
     const handleSupportCostChange = (e:any) => {
       searchParams.delete("supportingCost");
 
-      if (e.target.value) {
-        searchParams.append("supportingCost", e.target.value);
+      if ( e.target.value && e.target.value >= 0 ) {
+        searchParams.append("supportingCost", parseInt(e.target.value, 10).toString());
       }
 
       props.setParams(searchParams);
@@ -141,7 +141,7 @@ const PetitionsFilter = (props:any) => {
                   <div className=" flex flex-col gap-2 item-center justify-center place-items-center">
                     <p className="text-secondary font-semibold">Supporting Cost</p>
                     <div className=" p-1 rounded bg-white border-2 border-gray-300 hover:shadow-md hover:border-accent focus-within:shadow-md focus-within:border-accent w-full">
-                      <input type="number"  value={searchParams.get('supportingCost')?.toString()} placeholder="$0.00" onChange={handleSupportCostChange} className="appearance-none border-none focus:outline-none  p-1 border-link w-full text-center"/>
+                      <input type="number"  value={searchParams.get('supportingCost')?.toString()} placeholder="$All (0 for free)" onChange={handleSupportCostChange} className="appearance-none border-none focus:outline-none  p-1 border-link w-full text-center"/>
                     </div>
                   </div>
 
