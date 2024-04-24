@@ -28,7 +28,7 @@ const FormInput = (props:any) => {
 
                     <label className=" font-medium text-secondary">{props.label} {props.isRequired ? '*': ''}</label>
                     <div className={`transtion duration-200 p-2 border-2 bg-white rounded flex flex-row gap-1 ${props.error ? "border-red-500" : "border-gray-300 " } hover:shadow-md focus-within:shadow-md`}>
-                    <input onChange={(e) => props.setValue(e.target.value) } type={seePassword ? "text" : "password"} placeholder="Enter password" className="w-full appearance-none border-none focus:outline-none bg-transparent"/>
+                    <input required={props.isRequired} onChange={(e) => props.setValue(e.target.value) } type={seePassword ? "text" : "password"} placeholder="Enter password" className="w-full appearance-none border-none focus:outline-none bg-transparent"/>
                     <button type="button" onClick={()=> setSeePassword(!seePassword)}className="transtion duration-200 text-link hover:text-accent ">{seePassword ? <FaEye/> : <FaEyeSlash/>}</button>
                     </div>
                     <span className="text-red-500">{props.error}</span>

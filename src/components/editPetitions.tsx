@@ -2,8 +2,7 @@ import Alert from "../layout/alert";
 import { useEffect, useState } from "react";
 import FormInput from "../components/formInput";
 import axios from "axios";
-import AddSupportTier from "../components/addSupportTier";
-import { useNavigate } from "react-router-dom";
+
 
 const EditPetitions = (props:any) => {
 
@@ -16,10 +15,6 @@ const EditPetitions = (props:any) => {
       }>({});
 
 
-
-      const [tierErrors, setTierErrors] = useState<{
-        [key: number]: {[key:string] : string[]};
-      }>({});
 
     const [title, setTitle] = useState('');
     const [description , setDescription ] = useState('');
@@ -51,16 +46,6 @@ const EditPetitions = (props:any) => {
         e.preventDefault(); 
 
 
-        // const newErrors: { [key: string]: string[] } = {};
-    
-
-    
-
-        // if (Object.keys(newErrors).length > 0) {
-        //     // If there are validation errors, setErrors and stop form submission
-        //     setErrors(newErrors);
-        //     return;
-        // }
 
 
         const patchPetition  = {

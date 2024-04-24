@@ -5,12 +5,12 @@ import axios from "axios";
 
 import { BiEdit } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
 import Alert from "../layout/alert";
+import EditProfile from "../components/editProfile";
 
 const ViewProfile = () => {
 
-    const navigate = useNavigate();
+    
 
     const[userInfo, setUserInfo] = useState<{firstName: string, lastName: string, email: string}>({firstName:"", lastName: "", email: ""});
     const[heroOwnerImage, setHeroOwnerImage] = useState("");
@@ -80,16 +80,7 @@ const ViewProfile = () => {
 
     },[])
 
-    const handleLogout = () => {
-
-        localStorage.removeItem('token');
-        localStorage.removeItem('userId');
-        navigate('/');
-        window.location.reload();
-
-
-
-    }
+    
 
     const handleDeleteImg = () => {
 
@@ -153,14 +144,14 @@ const ViewProfile = () => {
 
         return <Alert>
 
-            <div className="w-[400px] h-fit flex flex-col bg-white rounded  p-10 ">
+            <div className="w-[400px] h-fit flex flex-col bg-white rounded gap-4 p-4 ">
 
-                <p>Are you sure you want to delete your profile image ?</p>
+                <p>Are you sure you want to delete your profile image? This action can not be undone.</p>
 
 
-                <div className="">
-                    <button>Cancel</button>
-                    <button>Delete</button>
+                <div className=" grid grid-cols-2 gap-2">
+                    <button onClick={()=> setDeleteImg(false)} className="p-2 bg-gray-300 rounded duration-300 text-black hover:text-white hover:bg-accent">Cancel</button>
+                    <button onClick={handleDeleteImg} className="p-2 bg-secondary rounded duration-300 text-white hover:bg-red-500">Delete</button>
 
                 </div>
 
@@ -177,17 +168,17 @@ const ViewProfile = () => {
     
 
     return ( 
-    <div className=" w-full h-fit pt-20 min-h-screen bg-background flex justify-center items-center">
+    <div className=" w-full h-fit pt-20 min-h-screen bg-background flex justify-center ">
         {deleteImg ? alertDeleteImg() : ""}
         <div className="xl:w-xl  w-full  flex py-2   flex-col items-center gap-5 ">
 
             <h1 className="text-[2rem] font-bold text-primary">Your Profile</h1>
 
             <div className=" relative">
-            <img className="h-[300px] w-[300px] object-cover object-center rounded-lg shadow-lg" src={heroOwnerImage}/>
+                <img alt={localStorage.getItem('userId')?.toString()} className="h-[300px] w-[300px] object-cover object-center rounded-lg shadow-lg" src={heroOwnerImage}/>
 
-            <button  onClick={() => inputFile.current?.click()} className=" absolute bottom-2 right-2 text-[1.8rem] text-white p-2 bg-secondary rounded-lg shadow-md duration-300 hover:bg-accent"><BiEdit/></button>
-            <button disabled={!hasImage} onClick={()=> setDeleteImg(true)} className=" disabled:bg-link disabled:text-gray-300 absolute bottom-2 left-2 text-[1.8rem] text-black shadow-md duration-300 hover:bg-red-500 hover:text-white  p-2 bg-gray-300 rounded-lg"><MdDelete/></button>
+                <button  onClick={() => inputFile.current?.click()} className=" absolute bottom-2 right-2 text-[1.8rem] text-white p-2 bg-secondary rounded-lg shadow-md duration-300 hover:bg-accent"><BiEdit/></button>
+                <button disabled={!hasImage} onClick={()=> setDeleteImg(true)} className=" disabled:bg-link disabled:text-gray-300 absolute bottom-2 left-2 text-[1.8rem] text-black shadow-md duration-300 hover:bg-red-500 hover:text-white  p-2 bg-gray-300 rounded-lg"><MdDelete/></button>
 
             </div> 
 
@@ -209,11 +200,8 @@ const ViewProfile = () => {
 
             </div>
 
-            <div className=" grid grid-cols-2 gap-2 w-[500px]">
-                <button className="rounded p-2 bg-gray-300 duration-300 hover:bg-accent hover:text-white" onClick={handleLogout}>Logout</button>
-                <button className="rounded p-2 bg-secondary text-white duration-300 hover:bg-accent">Edit Profile</button>
 
-            </div>
+            <EditProfile  user={userInfo}/>
 
 
             <input type="file" ref={inputFile} onChange={handleUplaodImg} accept="image/png,image/gif,image/jpeg, image/jpg" hidden />

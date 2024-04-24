@@ -14,7 +14,6 @@ import PetitionsSimilar from "./petiitionsSimilar";
 import Alert from "../layout/alert";
 import EditPetitions from "./editPetitions";
 
-import { title } from "process";
 
 const  PetitionView = () => {
 
@@ -478,7 +477,7 @@ const alertAddTiers = () => {
 
             <div className="grid grid-rows-2 w-[20%] p-2 bg-white rounded-xl shadow-lg justify-evenly">
                 <div className=" flex justify-center items-center ">
-                    <img alt={petition.ownerId.toString()} className="w-[150px] h-[150px] border-2 border-secondary  bg-gray-200 rounded-full object-contain " src={heroOwnerImage}/>
+                    <img alt={petition.ownerId.toString()} className="w-[150px] h-[150px] border-4 border-secondary  bg-gray-200 rounded-full object-center object-cover " src={heroOwnerImage}/>
                 </div>
 
                 <div className="flex flex-col justify-evenly items-center">
