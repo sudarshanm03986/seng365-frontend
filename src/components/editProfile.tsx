@@ -32,11 +32,34 @@ const EditProfile = (props:any) => {
  
     const handleLogout = () => {
 
-        localStorage.removeItem('token');
-        localStorage.removeItem('userId');
-        navigate('/');
-        window.location.reload();
+        axios.post(process.env.REACT_APP_DOMAIN + '/users/logout', 
+        {headers: 
+            {  
+                "x-authorization" : localStorage.getItem('token')
+            }
+        }) 
+        .then ((res) => {
+            localStorage.removeItem('token');
+            localStorage.removeItem('userId');
+            navigate('/');
+            window.location.reload();
+    
 
+
+
+        }, (err) => {
+            
+            localStorage.removeItem('token');
+            localStorage.removeItem('userId');
+            navigate('/');
+            window.location.reload();
+    
+
+        })
+
+
+
+       
 
 
     }

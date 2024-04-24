@@ -7,8 +7,11 @@ import { BiEdit } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
 import Alert from "../layout/alert";
 import EditProfile from "../components/editProfile";
+import { useNavigate } from "react-router-dom";
 
 const ViewProfile = () => {
+
+    const navigate = useNavigate();
 
     
 
@@ -56,7 +59,16 @@ const ViewProfile = () => {
             })
             .then((res) => {
 
+                if (!res.data.email) {
+                    localStorage.removeItem('token');
+                    localStorage.removeItem('userId');
+                    navigate('/');
+                    window.location.reload();
+                }
+
                 setUserInfo(res.data);
+
+
 
                 
             }, (err) => {
@@ -78,7 +90,7 @@ const ViewProfile = () => {
 
 
 
-    },[])
+    },[navigate])
 
     
 
