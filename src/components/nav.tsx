@@ -96,7 +96,7 @@ const Nav = () => {
 
                         {showUserMenu ? 
                         <div className="fixed h-fit translate-y-[3.9rem] -translate-x-10  bg-background w-[8rem] shadow-md flex flex-col border-[1px] border-gray-300 sl">
-                            <button className=" transition duration-300 p-2 text-link hover:bg-accent hover:text-white">Profile</button>
+                            <button onClick={()=> {navigate('/profile'); window.location.reload()}} className=" transition duration-300 p-2 text-link hover:bg-accent hover:text-white">Profile</button>
                             <button onClick={()=> {localStorage.removeItem('token'); localStorage.removeItem('userId'); navigate('/');window.location.reload();}} className=" transition duration-300 p-2 text-link hover:bg-accent hover:text-white">Logout</button>
 
 

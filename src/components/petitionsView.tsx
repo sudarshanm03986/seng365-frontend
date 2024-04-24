@@ -13,7 +13,7 @@ import PetitionsSupportTiers from "./petitionsSupportTiers";
 import PetitionsSimilar from "./petiitionsSimilar";
 import Alert from "../layout/alert";
 import EditPetitions from "./editPetitions";
-import EditSupportTiers from "./editSupportTier";
+
 import { title } from "process";
 
 const  PetitionView = () => {
@@ -22,7 +22,7 @@ const  PetitionView = () => {
 
     const navigate = useNavigate();
 
-    // const inputFile = useRef<HTMLInputElement>(null);
+
 
     const [heroPetitionImage, setHeroPetitionImage] = useState("");
     const [heroOwnerImage, setHeroOwnerImage] = useState("");

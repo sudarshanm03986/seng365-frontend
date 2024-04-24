@@ -12,6 +12,7 @@ import Petitions from "./view/petitions";
 import Petition from "./view/petition";
 import AddPetitions from "./view/addPetitions";
 import MyPetitions from "./view/myPetitions";
+import ViewProfile from "./view/viewProfile";
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
 
             {!localStorage.getItem('token') && !localStorage.getItem('userId') ?  <Route path="/login" element={<Login/>}/> : ""}
             {!localStorage.getItem('token') && !localStorage.getItem('userId') ? <Route path="/register" element={<Register/>} />: ""}
+            {localStorage.getItem('token') && localStorage.getItem('userId') ? <Route path="/profile" element={<ViewProfile/>} />: ""}
 
             <Route path="/myPetitions" element={ !localStorage.getItem('token') && !localStorage.getItem('userId') ? <Login/> : <MyPetitions/>} />
             <Route path="/addPetitions" element={ !localStorage.getItem('token') && !localStorage.getItem('userId') ? <Login/> : <AddPetitions/>} />

@@ -280,7 +280,7 @@ const AddPetitions = () => {
              type='file' 
              placeholder='Upload Petition Image' 
              label='Upload Petition Image' 
-             isRequired={false} 
+             isRequired={true} 
              setValue={setFile}
              error={errors.file}/>
 
