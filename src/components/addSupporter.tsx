@@ -107,7 +107,7 @@ const AddSupporter = (props : any) => {
 
     return ( <div>
         
-        <button disabled={supported} onClick={()=> setSupport(true)} className=" hover:bg-accent disabled:bg-link disabled:text-gray-300 text-[1.0rem] font-semibold hover:text-white bg-secondary py-3 px-3 rounded duration-300 text-white flex items-center justify-center gap-2 disabled:text-sm disabled:font-normal">{ supported ? <p>Already <br/>Supported </p> :  'Support'}</button>
+        <button disabled={supported} onClick={()=> setSupport(true)} className=" hover:bg-accent disabled:bg-link disabled:text-gray-300  font-semibold hover:text-white bg-secondary py-2 px-3 rounded duration-300 text-white flex items-center justify-center gap-2 disabled:text-sm disabled:font-normal">{ supported ? <p>Already <br/>Supported </p> :  'Support'}</button>
         {support ? (localStorage.getItem('token') && localStorage.getItem('userId') ? <Alert>
 
             <div className="w-[500px] h-fit bg-background rounded p-4 flex flex-col gap-2">
