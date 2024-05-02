@@ -13,6 +13,7 @@ import Petition from "./view/petition";
 import AddPetitions from "./view/addPetitions";
 import MyPetitions from "./view/myPetitions";
 import ViewProfile from "./view/viewProfile";
+import NeedAccount from "./view/needAccount";
 
 
 function App() {
@@ -31,8 +32,8 @@ function App() {
             {!localStorage.getItem('token') && !localStorage.getItem('userId') ? <Route path="/register" element={<Register/>} />: ""}
             {localStorage.getItem('token') && localStorage.getItem('userId') ? <Route path="/profile" element={<ViewProfile/>} />: ""}
 
-            <Route path="/myPetitions" element={ !localStorage.getItem('token') && !localStorage.getItem('userId') ? <Login/> : <MyPetitions/>} />
-            <Route path="/addPetitions" element={ !localStorage.getItem('token') && !localStorage.getItem('userId') ? <Login/> : <AddPetitions/>} />
+            <Route path="/myPetitions" element={ !localStorage.getItem('token') && !localStorage.getItem('userId') ? <NeedAccount message={'You need an account to view your Petitions'}/> : <MyPetitions/>} />
+            <Route path="/addPetitions" element={ !localStorage.getItem('token') && !localStorage.getItem('userId') ? <NeedAccount message={'You need an account to create a Petitions'}/>: <AddPetitions/>} />
             <Route path="*" element={<NotFound/>}/>
 
           </Routes>

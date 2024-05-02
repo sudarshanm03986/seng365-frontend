@@ -5,8 +5,6 @@ import AddSupportTier from "../components/addSupportTier";
 import { useNavigate } from "react-router-dom";
 
 
-
-
 const AddPetitions = () => {
 
     const [category, setCategory] = useState<Array<Category>>([]);
@@ -228,7 +226,10 @@ const AddPetitions = () => {
 
     }
 
-    return ( 
+
+
+
+    return  ( 
     <div className="pt-20 pb-10 w-full h-fit min-h-screen bg-background flex justify-center">
 
         <div className="xl:w-xl  w-full  flex py-2 flex-col items-center gap-5 "> 

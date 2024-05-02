@@ -235,7 +235,7 @@ const Register = () => {
              error={errors.file}/>
             
 
-            <button type="submit" className="transtion duration-200 hover:shadow-md p-2 bg-gray-300 rounded hover:bg-accent hover:text-white" >Resister</button>
+            <button type="submit" className="transtion duration-200 hover:shadow-md p-2 bg-gray-300 rounded hover:bg-accent hover:text-white" >Create an account</button>
            
         </form>
 

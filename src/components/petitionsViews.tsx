@@ -28,10 +28,10 @@ const PetitionsView = (props: any) => {
 
     useEffect(() => {
 
-        setTimeout(() => {
-            // setData('Loaded data');
-            setLoading(false);
-          }, 1500); // Simulating a 2-second delay
+        // setTimeout(() => {
+        //     // setData('Loaded data');
+        //     setLoading(false);
+        //   }, 1500); // Simulating a 2-second delay
 
         const getParams = () => {
 
@@ -62,17 +62,21 @@ const PetitionsView = (props: any) => {
 
         const getPetitons = () => {
 
+            setLoading(true);
+
             axios.get(process.env.REACT_APP_DOMAIN + '/petitions' + getParams()) 
             .then((res) => {
                 setErrorFlag(false);
                 setErrorMessage("");
                 setPetitions(res.data.petitions);
                 setNumOfPetitions(res.data.count);
+                setLoading(false);
                
                
             }, (err) => {
                 setErrorFlag(true);
                 setErrorMessage(err.toString());
+                setLoading(false);
                 
             })
 
