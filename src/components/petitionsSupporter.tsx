@@ -28,8 +28,14 @@ const PetitionsSupporter = (props:any) => {
             axios.get(process.env.REACT_APP_DOMAIN +  '/petitions/' + props.id + '/supporters')
             .then((res) => {
 
-                setSupporter(res.data.filter((data:supportTiers) => {return data.supportTierId === props.tierId}));
+                const data = res.data.filter((data:supportTiers) => {return data.supportTierId === props.tierId});
+                setSupporter(data);
 
+                if ( data.length > 0 ) {
+                    props.setHasSupporter(true);
+                }
+
+                console.log(data.length)
             }, (err) => {
 
                 setErrorFlag(true);
@@ -58,17 +64,10 @@ const PetitionsSupporter = (props:any) => {
         
         
         
-        {/* {show ? (  */}
+      
         
         <div hidden={!show} className=" rounded-md w-[500px]">
-        {/* <table className="w-full  gap-2"> */}
-            {/* <tr className="text-accent text-sm font-thin">
-              
-                <th>Profile Picture</th>
-                <th>Name</th>
-                <th>Message</th>
-                
-            </tr> */}
+      
             <div className="flex flex-col gap-2">
                {supporter.map((data) => 
                 {
@@ -101,10 +100,10 @@ const PetitionsSupporter = (props:any) => {
                 
             
 
-        {/* </table> */}
+      
         </div>
 
-     {/* ): <></>} */}
+
      </div>);
 }
  

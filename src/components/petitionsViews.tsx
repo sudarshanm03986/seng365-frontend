@@ -62,7 +62,7 @@ const PetitionsView = (props: any) => {
 
         const getPetitons = () => {
 
-            setLoading(true);
+        
 
             axios.get(process.env.REACT_APP_DOMAIN + '/petitions' + getParams()) 
             .then((res) => {

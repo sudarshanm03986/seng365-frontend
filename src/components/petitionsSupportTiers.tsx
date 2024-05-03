@@ -2,7 +2,6 @@ import { useState } from "react";
 import PetitionsSupporter from "./petitionsSupporter";
 import { BiEdit } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
-import EditPetitions from "./editPetitions";
 import EditSupportTiers from "./editSupportTier";
 import axios from "axios";
 import Alert from "../layout/alert";
@@ -13,7 +12,7 @@ const PetitionsSupportTiers = (props: any) => {
 
     const data = props.data;
 
-
+    const [hasSupporter, setHasSupporter] = useState(false);
     const [editTier, setEditTier] = useState(false);
     const [alertDelete, setAlertDelete] = useState(false);
 
@@ -109,8 +108,8 @@ const PetitionsSupportTiers = (props: any) => {
             <p>{data.cost === 0 ? 'FREE' :'$' + data.cost}</p>
 
             { localStorage.getItem('token') && localStorage.getItem('userId') && parseInt(localStorage.getItem('userId') || '', 10) === props.ownerId ? <div className="absolute right-1 top-2 flex gap-2 h-full justify-center">
-                <button onClick={()=> setEditTier(true)} className=" hover:bg-accent text-[1.2rem] hover:text-white bg-gray-300 py-2 px-2 rounded duration-300 text-black flex items-center justify-center gap-2 "><BiEdit/></button>
-                <button disabled={props.disabled} onClick={()=>setAlertDelete(true)} className="text-[1.2rem] disabled:bg-link disabled:text-gray-300 hover:bg-red-500  hover:text-white bg-gray-300 py-2 px-2 rounded duration-300 text-black flex items-center justify-center gap-2 "><MdDelete/></button>
+                <button disabled= {hasSupporter}onClick={()=> setEditTier(true)} className=" hover:bg-accent text-[1.2rem] disabled:bg-link disabled:text-gray-300 hover:text-white bg-gray-300 py-2 px-2 rounded duration-300 text-black flex items-center justify-center gap-2 "><BiEdit/></button>
+                <button disabled={props.disabled || hasSupporter} onClick={()=>setAlertDelete(true)} className="text-[1.2rem] disabled:bg-link disabled:text-gray-300 hover:bg-red-500  hover:text-white bg-gray-300 py-2 px-2 rounded duration-300 text-black flex items-center justify-center gap-2 "><MdDelete/></button>
             </div> : <div className="absolute right-1 top-4 flex gap-2 h-full items-center">
 
                     <AddSupporter tierId={data.supportTierId} title={data.title} petitionId={props.petitionId} ownerId={props.ownerId}/>
@@ -122,7 +121,7 @@ const PetitionsSupportTiers = (props: any) => {
 
         
       
-        <PetitionsSupporter id={props.petitionId} tierId={props.tierId}/>
+        <PetitionsSupporter setHasSupporter={setHasSupporter} id={props.petitionId} tierId={props.tierId}/>
     
 
 </div>);

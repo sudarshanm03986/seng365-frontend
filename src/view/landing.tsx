@@ -12,8 +12,8 @@ const Landing = () => {
             <><a href="/login" className="transtion duration-200 text-link hover:text-accent text-[1.5rem]">Login</a>
             <a href="/register" className="transtion duration-200 text-link hover:text-accent text-[1.5rem]">Register</a></>:
             <><a href="/petitions" className="transtion duration-200 text-link hover:text-accent text-[1.5rem]">View</a>
-            <a href="/users" className="transtion duration-200 text-link hover:text-accent text-[1.5rem]">Add</a>
-            <a href="/users" className="transtion duration-200 text-link hover:text-accent text-[1.5rem]">Profile</a></> }
+            <a href="/addPetitions" className="transtion duration-200 text-link hover:text-accent text-[1.5rem]">Add</a>
+            <a href="/profile" className="transtion duration-200 text-link hover:text-accent text-[1.5rem]">Profile</a></> }
             </div>
 
 

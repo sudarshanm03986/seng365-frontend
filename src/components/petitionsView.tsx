@@ -7,7 +7,6 @@ import DefaultOwnerImg from './../assets/default_owner_img.png'
 import { MdDelete } from "react-icons/md";
 import { BiEdit } from "react-icons/bi";
 import { IoIosAdd } from "react-icons/io";
-// import { RiImageEditFill } from "react-icons/ri";
 
 import PetitionsSupportTiers from "./petitionsSupportTiers";
 import PetitionsSimilar from "./petiitionsSimilar";
@@ -271,43 +270,6 @@ const handleUploadNewTier = (e: React.FormEvent<HTMLFormElement>) => {
 
 
 }
-
-// ============ Image Update =====================
-    // const handleImageUpdate = (e:any) => {
-
-    //     const file = e.target.files?.[0] as File;
-    //     const contentType = file.type
-
-    //     // console.log(file);
-
-    //     if (file && (['image/png', 'image/gif', 'image/jpg', 'image/jpeg'].includes(contentType))) {
-
-    //         axios.put(process.env.REACT_APP_DOMAIN + '/petitions/' + petition.petitionId + '/image', 
-    //             file, 
-    //             {headers: 
-    //                 {   "Content-Type" : contentType, 
-    //                     "x-authorization" : localStorage.getItem('token')
-    //                 }
-    //             }
-    //         ) 
-    //         .then ((res) => {
-
-    //             console.log('Image Update Succesfull')
-    //             window.location.reload();
-
-
-    //         }, (err) => {
-
-    //         })
-
-    //     } else {
-
-    //         console.error("Invalid Image")
-
-    //     }
-        
-
-    // }
 
 
 
