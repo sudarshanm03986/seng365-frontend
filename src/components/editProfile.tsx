@@ -201,7 +201,7 @@ const EditProfile = (props:any) => {
 
         return <Alert>
 
-            <div className="bg-white rounded w-[500px] flex h-fit flex-col p-4 gap-2">
+            <div className="bg-white rounded w-[500px] flex max-h-full h-fit flex-col p-4 gap-2  overflow-y-auto">
                 <p className="text-primary font-semibold text-[1.4rem]">Edit Profile</p>
                 <p className="text-secondary font-semibold">Only enter in the field you want to update</p>
 

@@ -82,6 +82,7 @@ const PetitionsPagination = (props:any) => {
 
             button.push(
                 <button
+                    key={i.toString()}
                     disabled={ parseInt(searchParams.get('startIndex') || '0', 10)/ parseInt( searchParams.get('count') || '0', 10) === i}
                     className={ "disabled:bg-secondary disabled:text-white duration-300 px-4 bg-gray-300 border-r-2 hover:bg-accent hover:text-white"}
                     onClick={()=> {searchParams.delete('startIndex') ; searchParams.append('startIndex', (i * parseInt( searchParams.get('count') || '0', 10)).toString()) ;props.setParams(searchParams);  scrollToTop();} }
@@ -186,20 +187,22 @@ const PetitionsPagination = (props:any) => {
         <div className="flex flex-col  gap-10 p-5">
 
             {parseInt(searchParams.get('startIndex') || '0', 10)/ parseInt( searchParams.get('count') || '0', 10)  >= numPages-1 ? <p className="text-lg font-semibold text-primary" >End of Petition Results !</p> : ""}
-        <div className=" grid grid-cols-3">
-
+        <div className=" grid xl:grid-cols-3 grid-rows-2 justify-center gap-2">
+            
+            <div className="flex xl:items-start xl:justify-start items-center justify-center">
             <div className="flex flex-row rounded border-2 border-gray-300 w-fit">
-            <p className="bg-gray-300  p-2 " >Sort by</p>
-            <select onChange={handleChange} className=" rounded p-2">
+            <p className="bg-gray-300  p-2 " >Item per page</p>
+            <select defaultValue={10} onChange={handleChange} className=" rounded p-2 bg-white">
                 <option>5</option>
                 <option>6</option>
                 <option>7</option>
                 <option>8</option>
                 <option>9</option>
-                <option selected >10</option>
+                <option >10</option>
 
             </select>
             
+            </div>
             </div>
 
             <div className="flex justify-center">

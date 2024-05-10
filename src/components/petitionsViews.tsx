@@ -89,12 +89,12 @@ const PetitionsView = (props: any) => {
 
     const display_all_petitions = () =>{
 
-        return <div className=" grid grid-cols-3 gap-3"> 
+        return <div className=" grid xl:grid-cols-3 md:grid-cols-2  grid-cols-1 gap-3"> 
         
         
-        {petitions.map((petition) => 
+        {petitions.map((petition:Petitions) => {
         
-            <PetitionsCard  petitions={petition}/>)}
+            return (<PetitionsCard key={petition.petitionId}  petitions={petition}/>)})}
 
         </div>
 
@@ -102,7 +102,7 @@ const PetitionsView = (props: any) => {
 
     return loading ? <Loading /> : ( errorFlag ? <div> {errorMessage}</div> :
         <div className="flex flex-col gap-3 py-3"> 
-            <div className="flex items-center justify-between gap-2">
+            <div className="flex items-center md:justify-between gap-2 md:flex-row flex-col">
                 <div className="flex gap-2">
                     <PetitionsFilter setParams={setSearchParams}/>
                     <PetitionsSort setParams={setSearchParams}/>
