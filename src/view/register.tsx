@@ -178,7 +178,7 @@ const Register = () => {
     
 
 
-    return (  <div className="bg-background w-screen h-screen pt-28 flex flex-col gap-2 items-center ">
+    return (  <div className="bg-background w-screen h-fit min-h-screen pt-28 flex flex-col gap-2 items-center p-2">
 
     <div>
         <h1 className="text-[3rem] font-semibold text-primary">Register</h1>

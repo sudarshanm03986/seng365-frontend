@@ -125,7 +125,14 @@ const EditProfile = (props:any) => {
         })
         .then ((res) => {
 
+            setShowPopUp(false);
+            setFirstName("");
+            setLastName("");
+            setEmail("");
+            setNewPassword("");
+            setOldPassword("");
             window.location.reload();
+            
 
         }, (err) => {
 

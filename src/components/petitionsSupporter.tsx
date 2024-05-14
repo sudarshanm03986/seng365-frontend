@@ -35,7 +35,7 @@ const PetitionsSupporter = (props:any) => {
                     props.setHasSupporter(true);
                 }
 
-                console.log(data.length)
+              
             }, (err) => {
 
                 setErrorFlag(true);
@@ -53,7 +53,7 @@ const PetitionsSupporter = (props:any) => {
 
 
 
-    return( <div className="flex flex-col pt-2 items-center"> 
+    return errorFlag ? <div>{errorMessage}</div> : ( <div className="flex flex-col pt-2 items-center"> 
 
 
         <button 
@@ -69,11 +69,11 @@ const PetitionsSupporter = (props:any) => {
         <div hidden={!show} className=" rounded-md w-[500px]">
       
             <div className="flex flex-col gap-2">
-               {supporter.map((data) => 
+               {supporter.map((data , index) => 
                 {
                 
                 
-                return (<div className="flex gap-2">
+                return (<div key={index} className="flex gap-2">
                     <div>
                     <SupporterImg className="w-10 h-10 rounded-full object-cover " id={data.supporterId}/>
                     </div>

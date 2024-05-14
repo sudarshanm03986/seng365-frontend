@@ -70,7 +70,7 @@ const PetitionsSimilar = (props:any) => {
 
 
 
-    }, [props])
+    }, [props.categoryId, props.ownerId, props.id, props.petitionId])
     return ( errorFlag ? <div> {errorMessage}</div> : 
     <div className="flex flex-col gap-4 p-2 items-center ">
         <div className="flex gap-4 items-center justify-center">
@@ -81,7 +81,7 @@ const PetitionsSimilar = (props:any) => {
             <div className="w-[500px] h-fit relative overflow-x-hidden  overflow-y-visible shadow-xl rounded-xl">
                 
                 <div className="flex transition ease-out duration-500 w-fit" style={{transform : `translateX(-${sliderCurrent * 500}px)`}}>
-                {similarPetitions.map((data) =>  <div className="w-[500px] "><PetitionsCard petitions={data}/></div> )}
+                {similarPetitions.map((data, index) =>  <div key={index} className="w-[500px] "><PetitionsCard petitions={data}/></div> )}
                     
                 </div> 
         
@@ -94,10 +94,10 @@ const PetitionsSimilar = (props:any) => {
         </div>
 
         <div className="flex gap-2">
-            { similarPetitions.map((data, index) => {
+            { similarPetitions.map((_, index) => {
 
                 return (
-                    <div className={`w-3 h-3 rounded-full transition duration-400 ${sliderCurrent === index ? 'bg-secondary' : 'bg-gray-300'} `}>
+                    <div key={index} className={`w-3 h-3 rounded-full transition duration-400 ${sliderCurrent === index ? 'bg-secondary' : 'bg-gray-300'} `}>
                     </div>
                 )
             } )}

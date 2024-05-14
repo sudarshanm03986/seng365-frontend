@@ -87,7 +87,7 @@ const AddSupporter = (props : any) => {
 
                     }
 
-                    console.log(supporter.supporterId)
+                    
 
                 }
 

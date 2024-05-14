@@ -30,8 +30,8 @@ const MyPetitions = () => {
         <div className="flex flex-row items-center justify-center gap-2 bg-gray-300 w-fit rounded pl-2">
 
             <p className="font-semibold">Show</p>
-            <select className="w-fit p-2 border-gray-300 border-2 rounded-r" onChange={handleChange}> 
-                <option selected value={'own'} >My Petitions</option>
+            <select defaultValue={'own'}className="w-fit p-2 border-gray-300 border-2 rounded-r bg-white" onChange={handleChange}> 
+                <option value={'own'} >My Petitions</option>
                 <option value={'support'}>Supported Petitions</option>
             
             </select>

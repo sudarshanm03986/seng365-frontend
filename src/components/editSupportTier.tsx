@@ -1,8 +1,7 @@
 import axios from "axios";
 import Alert from "../layout/alert";
 import { useEffect, useState } from "react";
-import { IoIosAddCircleOutline } from "react-icons/io";
-import { MdDelete } from "react-icons/md";
+
 
 const EditSupportTiers = (props : any) => {
 

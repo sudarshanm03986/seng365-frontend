@@ -485,9 +485,9 @@ const alertAddTiers = () => {
 
                 <div className={ `flex flex-col w-full gap-2  justify-evenly `} >
                     
-                    {petition.supportTiers.map( (data:supportTiers) => {
+                    {petition.supportTiers.map( (data:supportTiers, index) => {
 
-                        return <PetitionsSupportTiers disabled={petition.supportTiers.length <= 1} ownerId={petition.ownerId} data={data} petitionId={petition.petitionId} tierId={data.supportTierId}/>
+                        return <PetitionsSupportTiers key={index} disabled={petition.supportTiers.length <= 1} ownerId={petition.ownerId} data={data} petitionId={petition.petitionId} tierId={data.supportTierId}/>
                               
                         })}
                     
