@@ -129,7 +129,7 @@ const AddPetitions = () => {
                     }
                 )
                 .then ((responses) => {
-                    navigate('/');
+                    navigate('/petitions/' + res.data.petitionId);
                     window.location.reload();
 
                     // console.log()
@@ -236,7 +236,7 @@ const AddPetitions = () => {
 
 
         <div>
-            <h1 className="text-[2rem] font-semibold text-primary" >Start a Petiiton</h1>
+            <h1 className="text-[2rem] font-semibold text-primary" >Start a Petition</h1>
             <p>Please fill in the form below to start a petition</p>
         </div>
     

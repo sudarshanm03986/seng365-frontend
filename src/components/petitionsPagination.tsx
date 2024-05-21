@@ -192,7 +192,7 @@ const PetitionsPagination = (props:any) => {
             <div className="flex xl:items-start xl:justify-start items-center justify-center">
             <div className="flex flex-row rounded border-2 border-gray-300 w-fit">
             <p className="bg-gray-300  p-2 " >Item per page</p>
-            <select defaultValue={10} onChange={handleChange} className=" rounded p-2 bg-white">
+            <select defaultValue={searchParams.get('count')|| 10} onChange={handleChange} className=" rounded p-2 bg-white">
                 <option>5</option>
                 <option>6</option>
                 <option>7</option>

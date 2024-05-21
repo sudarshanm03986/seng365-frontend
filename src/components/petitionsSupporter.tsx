@@ -79,8 +79,12 @@ const PetitionsSupporter = (props:any) => {
                     </div>
 
                     <div className="flex flex-col bg-gray-200 p-2 w-[90%] shadow-sm rounded-md items-start ">
-                        <p className="text-accent font-semibold">{data.supporterFirstName + ' ' + data.supporterLastName}</p>
+                        <div className="flex flex-row w-full justify-between">
+                            <p className="text-accent font-semibold">{data.supporterFirstName + ' ' + data.supporterLastName}</p>
+                            <p className="text-sm text-link">{new Date (data.timestamp).toLocaleDateString()}</p>
+                        </div>
                         <p className="">"{data.message}"</p>
+                        
                     </div>
                     
                     

@@ -72,7 +72,7 @@ const Nav = () => {
             
             <div className="flex flex-row gap-2 ">
                 {location.pathname === '/petitions'? "" : <form action="/petitions"className="transition duration-300 p-2 bg-white rounded border-2 border-gray-300 hover:shadow-md hover:border-accent focus-within:shadow-md focus-within:border-accent">
-                    <input name='q' placeholder="Search Petition" className="appearance-none border-none focus:outline-none bg-transparent"></input>
+                    <input name='q' maxLength={64} placeholder="Search Petition" className="appearance-none border-none focus:outline-none bg-transparent"></input>
                     <button type="submit" className=" transition duration-300  text-link hover:text-accent">Search</button>
                 </form>}
                 {!localStorage.getItem('token') ? 

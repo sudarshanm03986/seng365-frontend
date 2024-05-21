@@ -25,7 +25,7 @@ const PetitionsSearch = (props:any) => {
             <div className=" text-gray-400">
                 <FaSearch/>
             </div>
-            <input className="appearance-none border-none focus:outline-none bg-transparent w-full" placeholder="Search Petitions" value={searchParams.get('q')?.toString() || ""} onChange={handleChange}/>
+            <input maxLength={64} className="appearance-none border-none focus:outline-none bg-transparent w-full" placeholder="Search Petitions" value={searchParams.get('q')?.toString() || ""} onChange={handleChange}/>
         </div>
         
      );

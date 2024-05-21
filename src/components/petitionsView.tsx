@@ -395,7 +395,7 @@ const alertAddTiers = () => {
                     <h1 className="text-[2.8rem] font-bold text-primary">{petition.title}</h1>
                     { localStorage.getItem('token') && localStorage.getItem('userId') && parseInt(localStorage.getItem('userId') || '', 10) === petition.ownerId ?  <div className=" absolute right-0 flex justify-end text-[1.2rem] gap-2">
                     <button onClick={()=> setEdit(true)} className=" hover:bg-accent  hover:text-white bg-gray-300 py-1 px-2 rounded duration-300 text-black flex items-center justify-center gap-2 ">Edit <BiEdit/></button>
-                        <button onClick={()=> setRemove(true)} className="hover:bg-red-500  hover:text-white bg-gray-300 py-1 px-2 rounded duration-300 text-black flex items-center justify-center gap-2 "><MdDelete/></button>
+                        <button  disabled={petition.numberOfSupporters > 0} onClick={()=> setRemove(true)} className=" disabled:bg-link disabled:text-gray-300 hover:bg-red-500  hover:text-white bg-gray-300 py-1 px-2 rounded duration-300 text-black flex items-center justify-center gap-2 "><MdDelete/></button>
                         
                     </div> : <div></div>}
 
