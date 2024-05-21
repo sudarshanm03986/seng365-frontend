@@ -39,7 +39,7 @@ const Nav = () => {
             getOwnerImage();
         }
     
-    })
+    },[])
 
 
 
