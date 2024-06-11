@@ -7,7 +7,8 @@ import PetitionsSearch from "./petitionsSearch";
 import PetitionsFilter from "./petitionsFilter";
 import PetitionsSort from "./petitionsSort";
 import PetitionsPagination from "./petitionsPagination";
-import Loading from "../layout/loading";
+// import Loading from "../layout/loading";
+import CardSkeleton from "../layout/cardSkeleton";
 
 
 const PetitionsView = (props: any) => {
@@ -17,12 +18,12 @@ const PetitionsView = (props: any) => {
     // const [currentPage, setCurrentPage] = useState(1);
     const [numOfPetitions, setNumOfPetitions] = useState(0);
 
-
+    const [isLoading, setIsLoading] = useState(true);
     //========ERROR=======
     const [errorFlag, setErrorFlag] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
 
-    const [loading, setLoading] = useState(true);
+    // const [loading, setLoading] = useState(true);
     
 
 
@@ -70,13 +71,13 @@ const PetitionsView = (props: any) => {
                 setErrorMessage("");
                 setPetitions(res.data.petitions);
                 setNumOfPetitions(res.data.count);
-                setLoading(false);
+                setIsLoading(false);
                
                
             }, (err) => {
                 setErrorFlag(true);
                 setErrorMessage(err.toString());
-                setLoading(false);
+                setIsLoading(false);
                 
             })
 
@@ -89,10 +90,19 @@ const PetitionsView = (props: any) => {
 
     const display_all_petitions = () =>{
 
+
+        const load = []
+
+        for (let i = 0 ; i < parseInt(searchParams.get('count') || '10', 10); i++ ) {
+
+            load.push(<CardSkeleton/>)
+        }
+
         return <div className=" grid xl:grid-cols-3 md:grid-cols-2  grid-cols-1 gap-3"> 
         
+        {isLoading && <>{load}</>}
         
-        {petitions.map((petition:Petitions) => {
+        {!isLoading &&petitions.map((petition:Petitions) => {
         
             return (<PetitionsCard key={petition.petitionId}  petitions={petition}/>)})}
 
@@ -100,7 +110,7 @@ const PetitionsView = (props: any) => {
 
     }
 
-    return loading ? <Loading /> : ( errorFlag ? <div> {errorMessage}</div> :
+    return ( errorFlag ? <div> {errorMessage}</div> :
         <div className="flex flex-col gap-3 py-3"> 
             <div className="flex items-center md:justify-between gap-2 md:flex-row flex-col">
                 <div className="flex gap-2">

@@ -1,5 +1,7 @@
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
+import { SkeletonTheme } from "react-loading-skeleton";
 import './App.css';
+import 'react-loading-skeleton/dist/skeleton.css'
 
 
 import Nav from "./components/nav";
@@ -19,7 +21,9 @@ import NeedAccount from "./view/needAccount";
 function App() {
   return (
     <div className="App">
+      
       <Router>
+      <SkeletonTheme baseColor="#d3d3d3" highlightColor="#eee">
         <div>
           <Nav/>
           <Routes>
@@ -38,7 +42,7 @@ function App() {
 
           </Routes>
         </div>
-
+        </SkeletonTheme>
       </Router>
       
     </div>
