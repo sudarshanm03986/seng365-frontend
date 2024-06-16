@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect , useState} from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import Skeleton from "react-loading-skeleton";
 
 import DefaultPetitionImg from './../assets/default_petiitio_img.jpg'
 import DefaultOwnerImg from './../assets/default_owner_img.png'
@@ -42,6 +43,12 @@ const  PetitionView = () => {
     const [newTierTitle, setNewTierTitle] = useState('');
     const [newTierDescription, setNewTierDescription] = useState('');
     const [newTierCost, setNewTierCost] = useState(0);
+
+
+    //======= Load Boolean =======================
+    const [isPetitionLoaded, setIsPetitionLoaded] = useState(false);
+    const [isOwnerLoaded, setIsOwnerLoaded] = useState(false);
+
 
 
 
@@ -92,11 +99,13 @@ const  PetitionView = () => {
 
                 const imageUrl = URL.createObjectURL(res.data);
                 setHeroOwnerImage(imageUrl);
+                setIsOwnerLoaded(true);
 
                 
             }, (err) => {
 
                 setHeroOwnerImage(DefaultOwnerImg);
+                setIsOwnerLoaded(true);
                 
             })
 
@@ -108,11 +117,14 @@ const  PetitionView = () => {
 
                 const imageUrl = URL.createObjectURL(res.data);
                 setHeroPetitionImage(imageUrl);
+                setIsPetitionLoaded(true);
+
 
                 
             }, (err) => {
 
                 setHeroPetitionImage(DefaultPetitionImg);
+                setIsPetitionLoaded(true);
                 
             })
         }
@@ -122,7 +134,7 @@ const  PetitionView = () => {
         getPetitionImage();
         getOwnerImage();
 
-    }, [petition.categoryId, petition.petitionId, petition.ownerId])
+    }, [petition.petitionId, petition.ownerId])
     
 
 //============= DELETE ========================================================
@@ -402,11 +414,10 @@ const alertAddTiers = () => {
                 </div>
 
         <div className="flex gap-5"> 
-            <div className=" relative h-[384px] shadow-lg rounded-xl w-[384px] bg-white overflow-hidden">
-            <img src={heroPetitionImage} alt={petition.petitionId.toString()} className=" w-full h-full object-cover  rounded-xl" /> 
-            {/* <button  onClick={() => inputFile.current?.click()} className=" absolute bg-secondary text-[2rem] rounded-lg p-1  right-2 text-white bottom-2 shadow-md hover:bg-accent duration-300"><RiImageEditFill/></button> */}
-            {/* <input type="file" ref={inputFile}  hidden onChange={handleImageUpdate} accept="image/png,image/gif,image/jpeg, image/jpg"/> */}
-            </div>
+        {isPetitionLoaded ?  <div className=" relative h-[384px] shadow-lg rounded-xl w-[384px] bg-white overflow-hidden">
+            <img src={heroPetitionImage} alt={petition.petitionId.toString()} className=" w-full h-full object-cover  rounded-xl" />  </div> :  <Skeleton height={"384px"} width={"384px"} borderRadius={"0.75rem"} />} 
+            
+           
 
             <div className=" relative flex flex-col w-[50%] gap-2 bg-white rounded-xl shadow-lg justify-evenly p-2">
 
@@ -439,7 +450,7 @@ const alertAddTiers = () => {
 
             <div className="grid grid-rows-2 w-[20%] p-2 bg-white rounded-xl shadow-lg justify-evenly">
                 <div className=" flex justify-center items-center ">
-                    <img alt={petition.ownerId.toString()} className="w-[150px] h-[150px] border-4 border-secondary  bg-gray-200 rounded-full object-center object-cover " src={heroOwnerImage}/>
+                    {isOwnerLoaded ? <img alt={petition.ownerId.toString()} className="w-[150px] h-[150px] border-4 border-secondary  bg-gray-200 rounded-full object-center object-cover " src={heroOwnerImage}/> : <Skeleton width={"150px"} height={"150px"} borderRadius={"100%"}/> }
                 </div>
 
                 <div className="flex flex-col justify-evenly items-center">
