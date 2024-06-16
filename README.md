@@ -2,6 +2,11 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+# Create .env file
+Add these variable \
+PORT=8080 \
+REACT_APP_DOMAIN={server address} 
+
 ## Available Scripts
 
 In the project directory, you can run:
