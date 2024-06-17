@@ -404,7 +404,7 @@ const alertAddTiers = () => {
             <div className="flex relative justify-center items-center">
                     <div>
                     </div>
-                    <h1 className="text-[2.8rem] font-bold text-primary">{petition.title}</h1>
+                    <h1 className="sm:text-[2.8rem] text-[1.8rem] font-bold text-primary">{petition.title}</h1>
                     { localStorage.getItem('token') && localStorage.getItem('userId') && parseInt(localStorage.getItem('userId') || '', 10) === petition.ownerId ?  <div className=" absolute right-0 flex justify-end text-[1.2rem] gap-2">
                     <button onClick={()=> setEdit(true)} className=" hover:bg-accent  hover:text-white bg-gray-300 py-1 px-2 rounded duration-300 text-black flex items-center justify-center gap-2 ">Edit <BiEdit/></button>
                         <button  disabled={petition.numberOfSupporters > 0} onClick={()=> setRemove(true)} className=" disabled:bg-link disabled:text-gray-300 hover:bg-red-500  hover:text-white bg-gray-300 py-1 px-2 rounded duration-300 text-black flex items-center justify-center gap-2 "><MdDelete/></button>
@@ -413,34 +413,34 @@ const alertAddTiers = () => {
 
                 </div>
 
-        <div className="flex gap-5"> 
+        <div className="flex gap-5 sm:flex-row flex-col sm:items-start items-center"> 
         {isPetitionLoaded ?  <div className=" relative h-[384px] shadow-lg rounded-xl w-[384px] bg-white overflow-hidden">
             <img src={heroPetitionImage} alt={petition.petitionId.toString()} className=" w-full h-full object-cover  rounded-xl" />  </div> :  <Skeleton height={"384px"} width={"384px"} borderRadius={"0.75rem"} />} 
             
            
 
-            <div className=" relative flex flex-col w-[50%] gap-2 bg-white rounded-xl shadow-lg justify-evenly p-2">
+            <div className=" relative flex flex-col sm:w-[50%] w-[384px] sm:h-[384px] h-fit gap-2 bg-white rounded-xl shadow-lg justify-evenly p-2">
 
           
                 
                 <div className="flex flex-col gap-2  justify-center items-center">
-                    <h2 className="text-secondary text-xl font-semibold">Description</h2>
+                    <h2 className="text-secondary sm:text-xl text-lg font-semibold">Description</h2>
                     <p>{petition.description}</p>
                 </div>
 
-                <div className=" grid grid-cols-3">
+                <div className=" sm:grid sm:grid-cols-3 flex flex-col"> 
 
                     <div className="flex flex-col gap-2  justify-center items-center">
-                        <h2 className="text-secondary text-xl font-semibold">Total Supporter</h2>
+                        <h2 className="text-secondary sm:text-xl text-lg font-semibold">Total Supporter</h2>
                         <p>{petition.numberOfSupporters}</p>
                     </div>
                     <div className="flex flex-col gap-2  justify-center items-center">
-                        <h2 className="text-secondary text-xl font-semibold">Total money raised</h2>
+                        <h2 className="text-secondary sm:text-xl text-lg font-semibold">Total money raised</h2>
                         <p>${petition.moneyRaised ? petition.moneyRaised : 0}</p>
                     </div>
 
                     <div className="flex flex-col gap-2  justify-center items-center">
-                        <h2 className="text-secondary text-xl font-semibold">Created Date</h2>
+                        <h2 className="text-secondary sm:text-xl text-lg font-semibold">Created Date</h2>
                         <p>{new Date (petition.creationDate).toLocaleDateString()}</p>
                     </div>
 
@@ -448,19 +448,19 @@ const alertAddTiers = () => {
 
             </div>
 
-            <div className="grid grid-rows-2 w-[20%] p-2 bg-white rounded-xl shadow-lg justify-evenly">
+            <div className="sm:grid sm:grid-rows-2 flex sm:w-[20%] w-[384px] sm:h-[384px] p-2 bg-white rounded-xl shadow-lg justify-evenly">
                 <div className=" flex justify-center items-center ">
                     {isOwnerLoaded ? <img alt={petition.ownerId.toString()} className="w-[150px] h-[150px] border-4 border-secondary  bg-gray-200 rounded-full object-center object-cover " src={heroOwnerImage}/> : <Skeleton width={"150px"} height={"150px"} borderRadius={"100%"}/> }
                 </div>
 
                 <div className="flex flex-col justify-evenly items-center">
                     <div className="flex flex-col gap-2  justify-center items-center">
-                        <h2 className="text-secondary text-xl font-semibold">First Name</h2>
+                        <h2 className="text-secondary sm:text-xl text-lg font-semibold">First Name</h2>
                         <p>{petition.ownerFirstName}</p>
                     </div>
 
                     <div className="flex flex-col gap-2  justify-center items-center">
-                        <h2 className="text-secondary text-xl font-semibold">Last Name</h2>
+                        <h2 className="text-secondary sm:text-xl text-lg font-semibold">Last Name</h2>
                         <p>{petition.ownerLastName}</p>
                     </div>
                     
