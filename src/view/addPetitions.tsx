@@ -266,7 +266,7 @@ const AddPetitions = () => {
             <label className=" font-medium text-secondary">Category *</label>
                 <select defaultValue={-1} onChange={(e)=> setCategoryId(parseInt(e.target.value, 10)) }className={`rounded p-2 bg-white ${errors.categoryId ? 'border-red-500' : 'border-gray-300 '} border-2 text-gray`}>
                     <option  value={-1}>Choose a category</option>
-                    {category.map((data, index) => <option key={index} value={data.categoryId}>{data.name}</option>)}
+                    {category.map((data, index) => <option key={index} value={data.id}>{data.name}</option>)}
                 </select>
                 <span className="text-red-500">{errors.categoryId }</span>
             </div>

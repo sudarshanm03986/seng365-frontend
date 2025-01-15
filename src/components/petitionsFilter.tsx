@@ -115,9 +115,9 @@ const PetitionsFilter = (props:any) => {
 
     for (const categorie of category) {
       
-      if (searchParams.getAll('categoryIds').includes(categorie.categoryId.toString()))
+      if (searchParams.getAll('categoryIds').includes(categorie?.id?.toString()))
 
-        list.push({'value': categorie.categoryId, 'label' : categorie.name});
+        list.push({'value': categorie.id, 'label' : categorie.name});
 
     }
 
@@ -150,7 +150,7 @@ const PetitionsFilter = (props:any) => {
                   <p className="text-secondary font-semibold">Category</p>
 
                   <Select 
-                    options={category.map((data) => ({value: data.categoryId, label: data.name}))}
+                    options={category.map((data) => ({value: data.id, label: data.name}))}
                     isMulti
 
                     onChange={handleSelectChange}

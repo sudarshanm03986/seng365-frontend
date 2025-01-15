@@ -161,7 +161,7 @@ const EditPetitions = (props:any) => {
                     <label className=" font-medium text-secondary">Category *</label>
                         <select onChange={(e)=> setCategoryId(parseInt(e.target.value, 10)) }className={`rounded p-2 bg-white ${errors.categoryId ? 'border-red-500' : 'border-gray-300 '} border-2 text-gray`}>
                            
-                            {category.map((data) => <option selected={data.categoryId === categoryId } value={data.categoryId}>{data.name}</option>)}
+                            {category.map((data) => <option selected={data.id === categoryId } value={data.id}>{data.name}</option>)}
                         </select>
                         <span className="text-red-500">{errors.categoryId }</span>
                     </div>

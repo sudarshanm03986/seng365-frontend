@@ -52,13 +52,14 @@ const PetitionsCard = (props: any) => {
         }
 
 
-        const getCategory = () => {
-            axios.get(process.env.REACT_APP_DOMAIN + '/petitions/categories') 
+        const getCategory = async () => {
+            await axios.get(process.env.REACT_APP_DOMAIN + '/petitions/categories') 
             .then((res) => {
+
 
                 for(const category of res.data) {
 
-                    if (category.categoryId === props.petitions.categoryId ) {
+                    if (category.id === props.petitions.categoryId ) {
                         setCategoryName(category.name);
                     }
                 }
